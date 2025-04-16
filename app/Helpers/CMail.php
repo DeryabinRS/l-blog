@@ -10,7 +10,7 @@ class CMail
     {
         //Create an instance; passing `true` enables exceptions
         $mail = new PHPMailer(true);
-
+//        dd(config('services.mail'));
         try {
             //Server settings
             $mail->SMTPDebug = 0;
@@ -19,16 +19,16 @@ class CMail
             $mail->SMTPAuth   = true;
             $mail->Username   = config('services.mail.username');
             $mail->Password   = config('services.mail.password');
-            $mail->SMTPSecure = 'SSL';
+            $mail->SMTPSecure = config('services.mail.encryption');
             $mail->Port       = config('services.mail.port');
 
             //Recipients
             $mail->setFrom(
-//                $config['from_address'] ?? config('services.mail.from_address'),
-                'deryabinrs@yandex.ru',
+                $config['from_address'] ?? config('services.mail.from_address'),
                 $config['from_name'] ?? config('services.mail.from_name'),
             );
-            $mail->addAddress($config['recipient_address'], $config['recipient_name'] ?? null);
+//            $mail->addAddress($config['recipient_address'], $config['recipient_name'] ?? null);
+            $mail->addAddress("deryabinrs@yandex.ru", $config['recipient_name'] ?? null);
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML

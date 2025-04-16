@@ -86,10 +86,12 @@ class AuthController extends Controller
         $oldToken = DB::table('password_reset_tokens')->where('email', $user->email)->first();
 
         if ($oldToken) {
-            DB::table('password_reset_tokens')->where('email', $user->email)->update([
-                'token' => $token,
-                'created_at' => Carbon::now(),
-            ]);
+            DB::table('password_reset_tokens')
+                ->where('email', $user->email)
+                ->update([
+                    'token' => $token,
+                    'created_at' => Carbon::now(),
+                ]);
         } else {
             DB::table('password_reset_tokens')->insert([
                 'email' => $user->email,
@@ -118,6 +120,24 @@ class AuthController extends Controller
             return redirect()->route('admin.forgot')->with('success', 'На Ваш Email направлено письмо с восстановлением пароля');
         } else {
             return redirect()->route('admin.forgot')->with('fail', 'Ошибка восстановления пароля');
+        }
+    }
+
+    public function resetForm(Request $request, $token = null)
+    {
+        $isTokenExists = DB::table('password_reset_tokens')
+                            ->where('token', $token)
+                            ->first();
+
+        if (!$isTokenExists) {
+            return redirect()->route('admin.forgot')->with('fail', 'Не правильная ссылка для восстановления пароля');
+        } else {
+            $data = [
+                'token' => $token,
+                'pageTitle' => 'Восстановление пароля',
+            ];
+
+            return view('backend.pages.auth.reset', $data);
         }
     }
 }

@@ -58,12 +58,12 @@
 </head>
 <body>
 <div class="container">
-    <h4>Forgot Your Password?</h4>
+    <h4>Восстановление пароля</h4>
 
-    <p>Hi {{ $user->firstname }}</p>
-    <p>We received a request to reset the password associated with your account.</p>
-    <button onclick="window.location.href={{ $actionLink }}">RESET PASSWORD</button>
-    <p>If you did not make this request, please ignore this message.</p>
+    <p>Привет, {{ $user->firstname }}</p>
+    <p>Чтобы восстановить пароль пройдте по ссылке: </p>
+    <a href="{{ $actionLink }}" target="_blank">ВОССТАНОВИТЬ ПАРОЛЬ</a>
+    <p>Если вы не отправляли этот запрос, пожалуйста, проигнорируйте это сообщение.</p>
 </div>
 </body>
 </html>
