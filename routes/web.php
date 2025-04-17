@@ -24,7 +24,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/login', 'loginHandler')->name('login_handler');
             Route::get('/forgot-password', 'forgotForm')->name('forgot');
             Route::post('/send-password-reset-link', 'sendPasswordResetLink')->name('send_password_reset_link');
-            Route::get('/password/{token}', 'resetForm')->name('reset_password_form');
+            Route::get('/password/{token}', 'resetPasswordForm')->name('reset_password_form');
+            Route::post('/reset-password-handler', 'resetPasswordHandler')->name('reset_password_handler');
         });
     });
 
@@ -32,6 +33,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('/dashboard', 'adminDashboard')->name('dashboard');
             Route::post('/logout', 'logoutHandler')->name('logout');
+            Route::get('/profile', 'profileView')->name('profile');
         });
     });
 });

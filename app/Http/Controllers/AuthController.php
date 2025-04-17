@@ -123,7 +123,7 @@ class AuthController extends Controller
         }
     }
 
-    public function resetForm(Request $request, $token = null)
+    public function resetPasswordForm(Request $request, $token = null)
     {
         $isTokenExists = DB::table('password_reset_tokens')
                             ->where('token', $token)
@@ -132,12 +132,71 @@ class AuthController extends Controller
         if (!$isTokenExists) {
             return redirect()->route('admin.forgot')->with('fail', 'Не правильная ссылка для восстановления пароля');
         } else {
+            $diffMins = Carbon::createFromFormat('Y-m-d H:i:s', $isTokenExists->created_at)
+                            ->diffInMinutes(Carbon::now());
+
+            if($diffMins > 15){
+                return redirect()
+                    ->route('admin.forgot')
+                    ->with('fail', 'Срок ссылки для смены пароля истек. Пожалуйста повторите процедуру смены пароля');
+            }
+
             $data = [
                 'token' => $token,
                 'pageTitle' => 'Восстановление пароля',
             ];
 
             return view('backend.pages.auth.reset', $data);
+        }
+    }
+
+    public function resetPasswordHandler(Request $request)
+    {
+        $request->validate([
+            'new_password' => 'required|min:6|required_with:new_password_confirmation|same:new_password_confirmation',
+            'new_password_confirmation' => 'required',
+        ], [
+            'new_password.required' => 'Поле должно быть заполнено',
+            'new_password.same' => 'Пароли не совпадают',
+            'new_password.min' => 'Пароль не может содержать менее 6 символов',
+            'new_password_confirmation.required' => 'Поле должно быть заполнено',
+        ]);
+
+        $dbToken = DB::table('password_reset_tokens')
+                    ->where('token', $request->token)->first();
+
+        $user = User::where('email', $dbToken->email)->first();
+
+        User::where('email', $dbToken->email)->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        // Send notificatio email to this user email address that contain new password
+        $data = array(
+            'user' => $user,
+            'new_password' => $request->new_password
+        );
+
+        $mail_body = view('email-templates.password-change-template', $data)->render();
+
+        $mailConfig = array(
+            'recipient_address' => $user->email,
+            'recipient_name' => $user->firstname . ' ' . $user->lastname,
+            'subject' => 'Изменение пароля',
+            'body' => $mail_body,
+        );
+
+        if(CMail::send($mailConfig)) {
+            DB::table('password_reset_tokens')->where([
+                'email' => $dbToken->email,
+                'token' => $dbToken->token,
+            ])->delete();
+
+            return redirect()->route('admin.login')->with('success', 'Ваш пароль был успешно изменен');
+        } else {
+            return redirect()
+                ->route('admin.reset_password_form', [ 'token' => $dbToken->token ])
+                ->with('fail', 'Ошибка изменения пароля. Попробуйте позже');
         }
     }
 }

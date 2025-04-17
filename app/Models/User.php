@@ -55,4 +55,9 @@ class User extends Authenticatable
             'role' => UserRole::class,
         ];
     }
+
+    public function getPictureAttribute($value)
+    {
+        return $value ? asset('/images/users/' . $value) : asset('/images/users/avatar.png');
+    }
 }
