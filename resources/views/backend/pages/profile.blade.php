@@ -27,7 +27,7 @@
 @endsection
 @push('scripts')
     <script>
-        $('input[type="file"][id="profilePictureFile]').kropify({
+        $('input[type="file"][id="profilePictureFile"]').kropify({
             preview:'image#profilePicturePreview',
             viewMode:1,
             aspectRatio:1,
