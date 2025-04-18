@@ -11,7 +11,7 @@ class Settings extends Component
     public $default_tab = 'general_settings';
     protected $queryString = ['tab' => ['keep' => true]];
 
-    public $site_title, $site_email, $site_phone, $site_meta_keywords, $site_meta_description;
+    public $site_title, $site_email, $site_phone, $site_meta_keywords, $site_meta_description, $site_logo;
 
     public function selectTab($tab)
     {
@@ -30,7 +30,7 @@ class Settings extends Component
             $this->site_phone = $settings->site_phone;
             $this->site_meta_keywords = $settings->site_meta_keywords;
             $this->site_meta_description = $settings->site_meta_description;
-//            $this->site_logo = $settings->site_logo;
+            $this->site_logo = $settings->site_logo;
 //            $this->site_favicon = $settings->site_favicon;
         }
     }

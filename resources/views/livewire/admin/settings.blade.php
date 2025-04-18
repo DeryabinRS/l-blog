@@ -80,28 +80,18 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <h6>Логотип сайта</h6>
-                        <div class="profile-photo">
+                        <div class="profile-photo" style="margin: 20px 0; width: 200px; height: 50px">
                             <a
                                 href="javascript:;"
                                 onclick="event.preventDefault();document.getElementById('siteLogoFile').click();"
                                 class="edit-avatar"
+                                style="right: -40px"
                             >
                                 <i class="fa fa-pencil"></i>
                             </a>
                             <img src="{{ $site_logo }}" alt="" id="siteLogoPreview">
                             <input type="file" name="siteLogoFile" id="siteLogoFile" class="d-none" style="opacity: 0">
                         </div>
-{{--                        <div class="mb-2 mt-1" style="max-width: 200px">--}}
-{{--                            <img wire:ignore src="" alt="" class="img-thumbnail" id="preview_site_logo">--}}
-{{--                        </div>--}}
-{{--                        <form action="" method="POST" enctype="multipart/form-data" id="updateLogoForm">--}}
-{{--                            @csrf--}}
-{{--                            <div class="mb-2">--}}
-{{--                                <input type="file" name="site_logo" id="" class="form-control" />--}}
-{{--                                <small class="text-danger ml-1"></small>--}}
-{{--                            </div>--}}
-{{--                            <button type="submit" class="btn btn-primary">Изменить изображение</button>--}}
-{{--                        </form>--}}
                     </div>
                 </div>
             </div>
