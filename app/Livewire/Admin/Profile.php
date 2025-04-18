@@ -4,10 +4,10 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Helpers\CMail;
+use App\Models\UserSocialLink;
 
 class Profile extends Component
 {
@@ -18,6 +18,8 @@ class Profile extends Component
     public $firstname, $lastname, $middlename, $email;
 
     public $current_password, $new_password, $new_password_confirmation;
+
+    public $facebook_url, $instagram_url, $youtube_url, $vk_url, $linkedin_url, $twitter_url, $github_url;
 
     protected $listeners = [
         'updateProfile' => '$refresh',
@@ -32,11 +34,21 @@ class Profile extends Component
     {
         $this->tab = Request('tab') ?? $this->tabname;
 
-        $user = User::findOrFail(auth()->id());
+        $user = User::with('social_links')->findOrFail(auth()->id());
         $this->firstname = $user->firstname;
         $this->lastname = $user->lastname;
         $this->middlename = $user->middlename;
         $this->email = $user->email;
+
+        if (!is_null($user->social_links)) {
+            $this->facebook_url = $user->social_links->facebook_url;
+            $this->instagram_url = $user->social_links->instagram_url;
+            $this->youtube_url = $user->social_links->youtube_url;
+            $this->linkedin_url = $user->social_links->linkedin_url;
+            $this->twitter_url = $user->social_links->twitter_url;
+            $this->github_url = $user->social_links->github_url;
+            $this->vk_url = $user->social_links->vk_url;
+        }
     }
 
     public function render()
@@ -44,6 +56,44 @@ class Profile extends Component
         return view('livewire.admin.profile', [
             'user' => User::findOrFail(auth()->id()),
         ]);
+    }
+
+    public function updateSocialLinks()
+    {
+        $this->validate([
+            'facebook_url' => 'nullable|url',
+            'instagram_url' => 'nullable|url',
+            'youtube_url' => 'nullable|url',
+            'linkedin_url' => 'nullable|url',
+            'twitter_url' => 'nullable|url',
+            'github_url' => 'nullable|url',
+            'vk_url' => 'nullable|url',
+        ]);
+
+        $user = User::findOrFail(auth()->id());
+
+        $data = array(
+            'facebook_url' => $this->facebook_url,
+            'instagram_url' => $this->instagram_url,
+            'youtube_url' => $this->youtube_url,
+            'linkedin_url' => $this->linkedin_url,
+            'twitter_url' => $this->twitter_url,
+            'github_url' => $this->github_url,
+            'vk_url' => $this->vk_url,
+        );
+
+        if (!is_null($user->social_links)) {
+            $query = $user->social_links()->update($data);
+        } else {
+            $data['user_id'] = $user->id;
+            $query = UserSocialLink::insert($data);
+        }
+
+        if ($query) {
+            $this->dispatch('showToast', ['type' => 'success', 'message' => 'Данные успешно обновлены']);
+        } else {
+            $this->dispatch('showToast', ['type' => 'error', 'message' => 'Ошибка обновления данных']);
+        }
     }
 
     public function updatePersonalDetails()

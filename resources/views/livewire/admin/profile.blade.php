@@ -41,36 +41,41 @@
             <div class="profile-social">
                 <h5 class="mb-20 h5 text-blue">Social Links</h5>
                 <ul class="clearfix">
-                    <li>
-                        <a href="#" class="btn" data-bgcolor="#3b5998" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(59, 89, 152);"><i class="fa fa-facebook"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn" data-bgcolor="#1da1f2" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(29, 161, 242);"><i class="fa fa-twitter"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn" data-bgcolor="#007bb5" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(0, 123, 181);"><i class="fa fa-linkedin"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn" data-bgcolor="#f46f30" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(244, 111, 48);"><i class="fa fa-instagram"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn" data-bgcolor="#c32361" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(195, 35, 97);"><i class="fa fa-dribbble"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn" data-bgcolor="#3d464d" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(61, 70, 77);"><i class="fa fa-dropbox"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn" data-bgcolor="#db4437" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(219, 68, 55);"><i class="fa fa-google-plus"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn" data-bgcolor="#bd081c" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(189, 8, 28);"><i class="fa fa-pinterest-p"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn" data-bgcolor="#00aff0" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(0, 175, 240);"><i class="fa fa-skype"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn" data-bgcolor="#00b489" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(0, 180, 137);"><i class="fa fa-vine"></i></a>
-                    </li>
+                    @if($facebook_url)
+                        <li>
+                            <a href="{{ $facebook_url }}" class="btn" style="color: #ffffff; background-color: #3b5998;"><i class="fa fa-facebook"></i></a>
+                        </li>
+                    @endif
+                    @if($twitter_url)
+                        <li>
+                            <a href="{{ $twitter_url }}" class="btn" style="color: #1da1f2; background-color: #ffffff;"><i class="fa fa-twitter"></i></a>
+                        </li>
+                    @endif
+                    @if($linkedin_url)
+                        <li>
+                            <a href="{{ $linkedin_url }}" class="btn" data-bgcolor="#007bb5" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(0, 123, 181);"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    @endif
+                    @if($instagram_url)
+                        <li>
+                            <a href="{{ $instagram_url }}" class="btn" data-bgcolor="#f46f30" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(244, 111, 48);"><i class="fa fa-instagram"></i></a>
+                        </li>
+                    @endif
+                    @if($github_url)
+                        <li>
+                            <a href="{{ $github_url }}" class="btn" style="color: #ffffff; background-color: #3d464d;"><i class="fa fa-github"></i></a>
+                        </li>
+                    @endif
+                    @if($vk_url)
+                        <li>
+                            <a href="{{ $vk_url }}" class="btn" style="color: #ffffff; background-color: #3b5998;"><i class="fa fa-vk"></i></a>
+                        </li>
+                    @endif
+                    @if($youtube_url)
+                        <li>
+                            <a href="{{ $youtube_url }}" class="btn" data-bgcolor="#db4437" data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: rgb(219, 68, 55);"><i class="fa fa-youtube"></i></a>
+                        </li>
+                    @endif
                 </ul>
             </div>
 
@@ -206,9 +211,78 @@
                                 </form>
                             </div>
                         </div>
+
                         <div class="tab-pane fade {{ $tab == 'social_links' ? 'show active' : '' }}" id="social_links" role="tabpanel">
                             <div class="pd-20 profile-task-wrap">
-                                Social links
+                                <form method="POST" wire:submit="updateSocialLinks()">
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for=""><b>Facebook</b></label>
+                                                <input type="text" class="form-control" wire:model="facebook_url" placeholder="Facebook Url">
+                                                @error('facebook_url')
+                                                    <small class="text-danger ml-1">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for=""><b>Instagram</b></label>
+                                                <input type="text" class="form-control" wire:model="instagram_url" placeholder="Instagram Url">
+                                                @error('instagram_url')
+                                                    <small class="text-danger ml-1">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for=""><b>YouTube</b></label>
+                                                <input type="text" class="form-control" wire:model="youtube_url" placeholder="YouTube Url">
+                                                @error('youtube_url')
+                                                    <small class="text-danger ml-1">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for=""><b>ВК</b></label>
+                                                <input type="text" class="form-control" wire:model="vk_url" placeholder="ВК Url">
+                                                @error('vk_url')
+                                                    <small class="text-danger ml-1">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for=""><b>LinkedIn</b></label>
+                                                <input type="text" class="form-control" wire:model="linkedin_url" placeholder="LinkedIn Url">
+                                                @error('linkedin_url')
+                                                    <small class="text-danger ml-1">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for=""><b>Twitter</b></label>
+                                                <input type="text" class="form-control" wire:model="twitter_url" placeholder="Twitter Url">
+                                                @error('twitter_url')
+                                                    <small class="text-danger ml-1">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for=""><b>GitHub</b></label>
+                                                <input type="text" class="form-control" wire:model="github_url" placeholder="GitHub Url">
+                                                @error('github_url')
+                                                    <small class="text-danger ml-1">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mt-3">Обновить</button>
+                                </form>
                             </div>
                         </div>
                     </div>

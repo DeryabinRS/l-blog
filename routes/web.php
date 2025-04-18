@@ -18,7 +18,7 @@ Route::view('/example-auth', 'example-auth');
  * ADMIN ROUTES
  */
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::middleware(['guest'])->group(function () {
+    Route::middleware(['guest', 'preventBackHistory'])->group(function () {
         Route::controller(AuthController::class)->group(function () {
             Route::get('/login', 'loginForm')->name('login');
             Route::post('/login', 'loginHandler')->name('login_handler');
@@ -29,12 +29,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
     });
 
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth', 'preventBackHistory'])->group(function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('/dashboard', 'adminDashboard')->name('dashboard');
             Route::post('/logout', 'logoutHandler')->name('logout');
             Route::get('/profile', 'profileView')->name('profile');
             Route::post('/update-profile-picture', 'updateProfilePicture')->name('update_profile_picture');
+            Route::get('/settings', 'generalSettings')->name('settings');
+            Route::post('/update-site-logo', 'updateSiteLogo')->name('update_site_logo');
         });
     });
 });

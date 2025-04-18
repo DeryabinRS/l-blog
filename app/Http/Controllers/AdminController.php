@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -56,7 +57,36 @@ class AdminController extends Controller
         } else {
             return response()->json(['status' => 0, 'message' => 'Ошибка обновления изображения']);
         }
+    }
 
+    public function updateSiteLogo(Request $request)
+    {
+        $settings = GeneralSetting::take(1)->first();
+        $path = 'images/settings/';
+        $file = $request->file('siteLogoFile');
+        $old_picture = $settings->getAttributes()['site_logo'];
+        $filename = 'IMG_'.uniqid().'.png';
 
+        $upload = Kropify::getFile($file, $filename)->maxWoH(255)->save($path);
+
+        if ($upload) {
+            if ( $old_picture != null && File::exists(public_path($path.$old_picture)) ) {
+                File::delete(public_path($path.$old_picture));
+            }
+            $settings->update(['site_logo' => $filename]);
+
+            return response()->json(['status' => 1, 'message' => 'Изображение пользователя обновлено']);
+        } else {
+            return response()->json(['status' => 0, 'message' => 'Ошибка обновления изображения']);
+        }
+    }
+
+    public function generalSettings()
+    {
+        $data = [
+            'pageTitle' => 'Настройки сайта'
+        ];
+
+        return view('backend.pages.general_settings', $data);
     }
 }

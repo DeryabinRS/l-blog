@@ -420,8 +420,8 @@
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon fa fa-newspaper-o"></span
-                                    ><span class="mtext"> События </span>
+                        <span class="micon fa fa-newspaper-o"></span>
+                        <span class="mtext"> События </span>
                     </a>
                     <ul class="submenu">
                         <li><a href="">Добавить</a></li>
@@ -430,8 +430,8 @@
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon bi bi-command"></span
-                                    ><span class="mtext">Услуги</span>
+                        <span class="micon bi bi-command"></span>
+                        <span class="mtext">Услуги</span>
                     </a>
                     <ul class="submenu">
                         <li><a href="">Добавить</a></li>
@@ -441,8 +441,8 @@
 
                 <li>
                     <a href="invoice.html" class="dropdown-toggle no-arrow">
-                                    <span class="micon bi bi-receipt-cutoff"></span
-                                    ><span class="mtext">Invoice</span>
+                        <span class="micon bi bi-receipt-cutoff"></span>
+                        <span class="mtext">Invoice</span>
                     </a>
                 </li>
                 <li>
@@ -451,7 +451,6 @@
                 <li>
                     <div class="sidebar-small-cap">Настройки сайта</div>
                 </li>
-
                 <li>
                     <a
                         href="{{ route('admin.profile') }}"
@@ -463,7 +462,7 @@
                 </li>
                 <li>
                     <a
-                        href=""
+                        href="{{ route('admin.settings') }}"
                         class="dropdown-toggle no-arrow"
                     >
                         <span class="micon fa fa-cogs"></span>
