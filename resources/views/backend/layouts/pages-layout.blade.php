@@ -420,13 +420,13 @@
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
+                    <a href="javascript:;" class="dropdown-toggle {{ Route::is('admin.add_post') || Route::is('admin.add_post') ? 'active' : '' }}">
                         <span class="micon fa fa-newspaper-o"></span>
                         <span class="mtext"> События </span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="">Добавить</a></li>
-                        <li><a href="">Список событий</a></li>
+                        <li><a href="{{ route('admin.add_post') }}">Добавить</a></li>
+                        <li><a href="{{ route('admin.posts') }}">Список услуг</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
