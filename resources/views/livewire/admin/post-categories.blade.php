@@ -20,9 +20,9 @@
                         <tbody>
                         @forelse($post_categories as $item)
                             <tr>
-                                <td>{{ $item->id }}</td>
+                                <td width="30">{{ $item->id }}</td>
                                 <td>{{ $item->name }}</td>
-                                <td>
+                                <td width="80">
                                     <div class="table-actions">
                                         <a href="javascript:;" wire:click="editPostCategoryForm({{ $item->id }})" class="text-primary mx-2">
                                             <i class="dw dw-edit2"></i>
@@ -40,6 +40,9 @@
                         @endforelse
                         </tbody>
                     </table>
+                    <div class="d-block mt-1">
+                        {{ $post_categories->links('livewire::simple-bootstrap') }}
+                    </div>
                 </div>
             </div>
         </div>

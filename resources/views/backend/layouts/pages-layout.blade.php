@@ -402,13 +402,19 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
                 <li>
-                    <a href="{{ route('admin.dashboard') }}" class="dropdown-toggle no-arrow">
+                    <a
+                        href="{{ route('admin.dashboard') }}"
+                        class="dropdown-toggle no-arrow {{ Route::is('admin.dashboard') ? 'active' : '' }}"
+                    >
                         <span class="micon fa fa-home"></span>
                         <span class="mtext">Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.post_categories') }}" class="dropdown-toggle no-arrow">
+                    <a
+                        href="{{ route('admin.post_categories') }}"
+                        class="dropdown-toggle no-arrow {{ Route::is('admin.post_categories') ? 'active' : '' }}"
+                    >
                         <span class="micon fa fa-th-list"></span>
                         <span class="mtext">Категории событий</span>
                     </a>
@@ -443,13 +449,15 @@
                 <li>
                     <div class="dropdown-divider"></div>
                 </li>
+                @if(auth()->user()->role == 'superAdmin')
                 <li>
-                    <div class="sidebar-small-cap">Настройки сайта</div>
+                    <div class="sidebar-small-cap">Настройки</div>
                 </li>
+                @endif
                 <li>
                     <a
                         href="{{ route('admin.profile') }}"
-                        class="dropdown-toggle no-arrow"
+                        class="dropdown-toggle no-arrow {{ Route::is('admin.profile') ? 'active' : '' }}"
                     >
                         <span class="micon fa fa-user-circle"></span>
                         <span class="mtext">Профиль</span>
@@ -458,7 +466,7 @@
                 <li>
                     <a
                         href="{{ route('admin.settings') }}"
-                        class="dropdown-toggle no-arrow"
+                        class="dropdown-toggle no-arrow {{ Route::is('admin.settings') ? 'active' : '' }}"
                     >
                         <span class="micon fa fa-cogs"></span>
                         <span class="mtext">Настройки</span>

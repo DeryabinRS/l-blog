@@ -4,11 +4,16 @@ namespace App\Livewire\Admin;
 
 use App\Models\PostCategory;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class PostCategories extends Component
 {
+    use WithPagination;
+
     public $isUpdatePostCategoryMode = false;
     public $category_id, $category_name, $category_description;
+
+    public $perPage = 25;
 
     protected $listeners = [
         'deletePostCategory',
@@ -17,7 +22,7 @@ class PostCategories extends Component
     public function render()
     {
         return view('livewire.admin.post-categories', [
-            'post_categories' => PostCategory::orderBy('order', 'asc')->get(),
+            'post_categories' => PostCategory::orderBy('order', 'asc')->paginate($this->perPage, ['*'], 'pc_page'),
         ]);
     }
 
