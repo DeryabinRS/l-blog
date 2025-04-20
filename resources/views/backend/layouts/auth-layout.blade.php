@@ -52,8 +52,8 @@
         class="container-fluid d-flex justify-content-between align-items-center"
     >
         <div class="brand-logo">
-            <a href="login.html">
-                <img src="/backend/vendors/images/deskapp-logo.svg" alt="" />
+            <a href="/">
+                <img src="{{ isset(settings()->site_logo) ? settings()->site_logo : '/images/settings/logo.svg' }}" alt="" />
             </a>
         </div>
         <div class="login-menu">

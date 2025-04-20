@@ -211,11 +211,6 @@
             </div>
         </div>
         @livewire('admin.top-user-info')
-        <div class="github-link">
-            <a href="https://github.com/dropways/deskapp" target="_blank"
-            ><img src="/backend/vendors/images/github.svg" alt=""
-                /></a>
-        </div>
     </div>
 </div>
 
@@ -391,12 +386,12 @@
 
 <div class="left-side-bar">
     <div class="brand-logo">
-        <a href="index.html">
-            <img src="/backend/vendors/images/deskapp-logo.svg" alt="" class="dark-logo"/>
+        <a href="/">
+            <img src="{{ isset(settings()->site_logo) ? settings()->site_logo : '/images/settings/logo.svg' }}" alt="" class="dark-logo site_logo"/>
             <img
-                src="/backend/vendors/images/deskapp-logo-white.svg"
+                src="{{ isset(settings()->site_logo) ? settings()->site_logo : '/images/settings/logo.svg' }}"
                 alt=""
-                class="light-logo"
+                class="light-logo site_logo"
             />
         </a>
         <div class="close-sidebar" data-toggle="left-sidebar-close">
@@ -413,9 +408,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.dashboard') }}" class="dropdown-toggle no-arrow">
+                    <a href="{{ route('admin.post_categories') }}" class="dropdown-toggle no-arrow">
                         <span class="micon fa fa-th-list"></span>
-                        <span class="mtext">Categories</span>
+                        <span class="mtext">Категории событий</span>
                     </a>
                 </li>
                 <li class="dropdown">
@@ -483,10 +478,7 @@
             </div>
         </div>
         <div class="footer-wrap pd-20 mb-20 card-box">
-            DeskApp - Bootstrap 4 Admin Template By
-            <a href="https://github.com/dropways" target="_blank"
-            >Ankit Hingarajiya</a
-            >
+            DRSCript
         </div>
     </div>
 </div>

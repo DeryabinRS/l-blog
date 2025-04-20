@@ -8,7 +8,6 @@ class CMail
 {
     public static function send($config)
     {
-        //Create an instance; passing `true` enables exceptions
         $mail = new PHPMailer(true);
 
         try {

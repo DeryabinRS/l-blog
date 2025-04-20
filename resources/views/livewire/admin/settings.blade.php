@@ -18,7 +18,7 @@
                 href="#logo_favicon"
                 role="tab"
                 aria-selected="false"
-            >Логотип, иконка</a>
+            >Логотип</a>
         </li>
     </ul>
     <div class="tab-content">

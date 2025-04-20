@@ -89,4 +89,13 @@ class AdminController extends Controller
 
         return view('backend.pages.general_settings', $data);
     }
+
+    public function postCategoriesPage()
+    {
+        $data = [
+            'pageTitle' => 'Категории событий'
+        ];
+
+        return view('backend.pages.post_categories', $data);
+    }
 }

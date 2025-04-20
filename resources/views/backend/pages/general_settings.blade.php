@@ -29,7 +29,7 @@
     <script>
         $('input[type="file"][id="siteLogoFile"]').kropify({
             preview:'image#siteLogoPreview',
-            aspectRatio:200/50,
+            aspectRatio:200/55,
             cancelButtonText:'Cancel',
             resetButtonText:'Reset',
             cropButtonText:'Crop & update',
@@ -38,9 +38,6 @@
             showLoader:true,
             success:function(data){
                 if (data.status === 1) {
-                    Livewire.dispatch('updateTopUserInfo', []);
-                    Livewire.dispatch('updateProfile', []);
-
                     swal({
                         toast: true,
                         position: 'top-end',
@@ -48,7 +45,9 @@
                         title: data.message,
                         timerProgressBar: true,
                         showConfirmButton: false,
-                        timer: 2500
+                        timer: 1500,
+                    }).then(() => {
+                        location.reload();
                     });
                 } else {
                     swal({
@@ -63,7 +62,15 @@
                 }
             },
             errors:function(error, text){
-                console.log(text);
+                swal({
+                    toast: true,
+                    position: 'top-end',
+                    type: 'error',
+                    title: text,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    timer: 2500
+                });
             },
         });
     </script>
