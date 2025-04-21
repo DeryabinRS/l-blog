@@ -30,7 +30,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
     });
 
-    Route::middleware(['auth', 'preventBackHistory'])->group(function () {
+    Route::middleware(['auth', 'preventBackHistory', 'isAdmin'])->group(function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('/dashboard', 'adminDashboard')->name('dashboard');
             Route::post('/logout', 'logoutHandler')->name('logout');
