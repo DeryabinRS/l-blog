@@ -39,8 +39,8 @@ return array(
     */
 
     'route' => [
-        'prefix' => 'elfinder',
-        'middleware' => array('web', 'auth'), //Set to null to disable middleware filter
+        'prefix' => 'admin/filemanager',
+        'middleware' => array('web', 'auth', 'isAdmin'), //Set to null to disable middleware filter
     ],
 
     /*
@@ -76,7 +76,9 @@ return array(
     |
     */
 
-    'options' => array(),
+    'options' => array(
+
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +90,11 @@ return array(
     |
     */
     'root_options' => array(
-
+        'tmbCrop' => false,
+        'tmbPath' => '',
+        'tmbFbSelf' => false,
+//        'uploadMaxSize' => 10485760,
+        'uploadMaxSize' => 2097152,
     ),
 
 );

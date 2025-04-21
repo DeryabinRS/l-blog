@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'preventBackHistory' => App\Http\Middleware\PreventBackHistory::class,
             'onlySuperAdmin' => App\Http\Middleware\OnlySuperAdmin::class,
+            'isAdmin' => \App\Http\Middleware\IsAdminRole::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

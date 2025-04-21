@@ -441,9 +441,9 @@
                 </li>
 
                 <li>
-                    <a href="invoice.html" class="dropdown-toggle no-arrow">
-                        <span class="micon bi bi-receipt-cutoff"></span>
-                        <span class="mtext">Invoice</span>
+                    <a href="/admin/filemanager" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-files"></span>
+                        <span class="mtext">Файловый менеджер</span>
                     </a>
                 </li>
                 <li>
