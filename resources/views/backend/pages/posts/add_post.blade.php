@@ -35,7 +35,7 @@
     >
     @csrf
         <div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-8">
                 <div class="card card-box mb-2 p-4">
                     <div class="form-group">
                         <label for="">Название</label>
@@ -56,62 +56,102 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="">Изображение:</label>
-                        <div class="d-block mb-3" style="max-width: 250px">
-                            <img src="" alt="" class="img-thumbnail img-fluid" id="featured_image_preview">
-                        </div>
-                        <input type="file" onchange="loadFile(event)" id="featured_image" name="featured_image" class="form-control-file form-control height-auto">
-                        @error('featured_image')
-                            <small class="text-danger error-text featured_image_error">{{ $message }}</small>
-                        @enderror
-                        <script>
-                            const loadFile = function(event) {
-                                var output = document.getElementById('featured_image_preview');
-                                output.src = URL.createObjectURL(event.target.files[0]);
-                                output.onload = function() {
-                                    URL.revokeObjectURL(output.src) // free memory
-                                }
-                            };
-                        </script>
-                    </div>
-                    <div class="form-group">
                         <label for="">Контент</label>
                         <textarea
                             name="content"
-                            id=""
-                            class="form-control"
+                            id="content"
+                            class="ckeditor form-control"
                             placeholder="Текст события"
                         ></textarea>
                         @error('content')
                             <small class="text-danger error-text title_error">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="d-block">
-                        <button type="submit" class="btn badge-primary">Добавить событие</button>
+                    <div class="card card-box">
+                        <div class="card-header weight-500">SEO</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="">Введите ключевые слова через запятую</label>
+                                <input type="text" class="form-control" name="meta_keywords" placeholder="Введите ключевые слова">
+                                @error('meta_keywords')
+                                    <small class="text-danger error-text title_error">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">Мета описание</label>
+                                <textarea class="form-control" name="meta_description" placeholder="Введите мета-описание"></textarea>
+                                @error('meta_description')
+                                    <small class="text-danger error-text title_error">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-4">
                 <div class="card card-box mb-2">
-                    <div class="card-header weight-500">SEO</div>
+                    <div class="card-header weight-500">Параметры события</div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="">Введите ключевые слова через запятую</label>
-                            <input type="text" class="form-control" name="meta_keywords" placeholder="Введите ключевые слова">
-                            @error('meta_keywords')
-                                <small class="text-danger error-text title_error">{{ $message }}</small>
+                            <label for="">Изображение <small class="text-danger">(800px*800px)</small>:</label>
+                            <div class="d-block mb-3" style="max-width: 100%">
+                                <img src="" alt="" class="img-thumbnail img-fluid" id="featured_image_preview">
+                            </div>
+                            <input type="file" onchange="loadFile(event)" id="featured_image" name="featured_image" class="form-control-file form-control height-auto">
+                            @error('featured_image')
+                                <small class="text-danger error-text featured_image_error">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Мета описание</label>
-                            <textarea class="form-control" name="meta_description" placeholder="Введите мета-описание"></textarea>
-                            @error('meta_description')
-                                <small class="text-danger error-text title_error">{{ $message }}</small>
-                            @enderror
+                            <label for="">Теги</label><br>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="tags"
+                                placeholder="Введите теги"
+                                data-role="tagsinput"
+                            >
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <label for="">Видимость</label>
+                            <div class="custom-control custom-radio mb-5">
+                                <input type="radio" name="visibility" id="customRadio1" class="custom-control-input" value="1" checked>
+                                <label for="customRadio1" class="custom-control-label">Опубликовать</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-5">
+                                <input type="radio" name="visibility" id="customRadio2" class="custom-control-input" value="0">
+                                <label for="customRadio2" class="custom-control-label">Скрыть</label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="d-block mt-2 mb-3">
+            <button type="submit" class="btn badge-primary">Добавить событие</button>
+        </div>
     </form>
 @endsection
+@push('stylesheets')
+    <link rel="stylesheet" href="/backend/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
+@endpush
+@push('scripts')
+    <script src="/backend/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script>
+        const loadFile = function(event) {
+            const output = document.getElementById('featured_image_preview');
+            if (event.target?.files[0]){
+                output.src = URL.createObjectURL(event.target?.files[0]);
+            } else {
+                output.src = '';
+            }
+            if (output?.src) {
+                output.onload = function() {
+                    URL.revokeObjectURL(output?.src) // free memory
+                }
+            }
+        };
+    </script>
+@endpush
