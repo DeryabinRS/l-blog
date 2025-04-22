@@ -41,7 +41,7 @@ class PostController extends Controller
 
         if ($request->hasFile('featured_image')) {
             $path = 'images/posts/';
-            $thumbnail_path = $path.'thumb/';
+            $thumbnailPath = $path.'thumb/';
 
             $file = $request->file('featured_image');
             $fileName = $file->getClientOriginalName();
@@ -50,20 +50,12 @@ class PostController extends Controller
             $upload = $file->move($path, $newFileName);
             if ($upload) {
                 /** Resize image */
-                if (!File::isDirectory($thumbnail_path)) {
-                    File::makeDirectory($thumbnail_path, 0777, true, true);
+                if (!File::isDirectory($thumbnailPath)) {
+                    File::makeDirectory($thumbnailPath, 0777, true, true);
                 }
 
                 // Resize
-                $img = Image::make($path.$newFileName);
-
-//                $img->resize(600, null, function ($constraint) {
-//                    $constraint->aspectRatio();
-//                })->save($path.$newFileName);
-
-                $img->fit(650, 650)->save($path.$newFileName);
-                // Thumbnail
-                $img->fit(200, 200)->save($thumbnail_path.'thumb_'.$newFileName);
+                $this->makeFeaturedImage($path, $newFileName, $thumbnailPath);
 
                 $post = new Post();
                 $post->author_id = auth()->id();
@@ -103,8 +95,68 @@ class PostController extends Controller
         return view('backend.pages.posts.edit_post', $data);
     }
 
-    public function updatePost(Request $request, $id = null)
+    public function updatePost(Request $request)
     {
+        $post = Post::findOrFail($request->post_id);
+        $featuredImageName = $post->featured_image;
 
+        $request->validate([
+            'title' => 'required',
+            'post_category' => 'required|exists:post_categories,id',
+            'content' => 'required',
+            'featured_image' => 'nullable|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($request->hasFile('featured_image')) {
+            $oldFeaturedImage = $post->featured_image;
+            $path = 'images/posts/';
+            $thumbnailPath = $path.'thumb/';
+            $file = $request->file('featured_image');
+            $fileName = $file->getClientOriginalName();
+            $newFileName = time().'_'.$fileName;
+
+            $upload = $file->move(public_path($path), $newFileName);
+
+            if ($upload) {
+                // Generate thumbnail and resize image
+                $this->makeFeaturedImage($path, $newFileName, $thumbnailPath);
+                if ($oldFeaturedImage != null && File::exists($path.$oldFeaturedImage)) {
+                    File::delete(public_path($path.$oldFeaturedImage));
+
+                    if (File::exists(public_path($thumbnailPath.'thumb_'.$oldFeaturedImage))) {
+                        File::delete(public_path($thumbnailPath.'thumb_'.$oldFeaturedImage));
+                    }
+                }
+
+                $featuredImageName = $newFileName;
+            } else {
+                return redirect()->route('admin.edit_post', [ 'id' => $post->id ])->with('fail', 'Ошибка добавления файла');
+            }
+        }
+
+        $post->author_id = auth()->id();
+        $post->post_category = $request->post_category;
+        $post->title = $request->title;
+        $post->content = $request->{'content'};
+        $post->featured_image = $featuredImageName;
+        $post->tags = $request->tags;
+        $post->meta_keywords = $request->meta_keywords;
+        $post->meta_description = $request->meta_description;
+        $post->visibility = $request->visibility;
+
+        $saved = $post->save();
+
+        if ($saved) {
+            return redirect()->route('admin.edit_post', [ 'id' => $post->id ])->with('success', 'Данные успешно обновлены');
+        } else {
+            return redirect()->route('admin.edit_post', [ 'id' => $post->id ])->with('fail', 'Ошибка обновления данных');
+        }
+    }
+
+    private function makeFeaturedImage($path, $newFileName, $thumbnailPath)
+    {
+        $img = Image::make($path.$newFileName);
+        $img->fit(650, 650)->save($path.$newFileName);
+        $img->fit(200, 200)->save($thumbnailPath.'thumb_'.$newFileName);
     }
 }

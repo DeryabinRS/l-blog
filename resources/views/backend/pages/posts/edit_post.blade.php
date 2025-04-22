@@ -27,7 +27,7 @@
     </div>
 
     <form
-        action="{{ route('admin.update_post') }}"
+        action="{{ route('admin.update_post', [ 'post_id' => $post->id ]) }}"
         method="POST"
         autocomplete="off"
         enctype="multipart/form-data"
@@ -95,7 +95,7 @@
                                     class="form-control"
                                     name="meta_description"
                                     placeholder="Введите мета-описание"
-                                >value="{{ $post->meta_description }}"</textarea>
+                                >{{ $post->meta_description }}</textarea>
                                 @error('meta_description')
                                 <small class="text-danger error-text title_error">{{ $message }}</small>
                                 @enderror

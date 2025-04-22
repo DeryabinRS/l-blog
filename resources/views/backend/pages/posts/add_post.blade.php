@@ -39,7 +39,13 @@
                 <div class="card card-box mb-2 p-4">
                     <div class="form-group">
                         <label for="">Название</label>
-                        <input type="text" class="form-control" name="title" placeholder="Введите название">
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="title"
+                            placeholder="Введите название"
+                            value="{{ old('title') }}"
+                        >
                         @error('title')
                             <small class="text-danger error-text title_error">{{ $message }}</small>
                         @enderror
@@ -62,7 +68,7 @@
                             id="content"
                             class="ckeditor form-control"
                             placeholder="Текст события"
-                        ></textarea>
+                        >{{ old('content') }}</textarea>
                         @error('content')
                             <small class="text-danger error-text title_error">{{ $message }}</small>
                         @enderror
@@ -72,14 +78,24 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="">Введите ключевые слова через запятую</label>
-                                <input type="text" class="form-control" name="meta_keywords" placeholder="Введите ключевые слова">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="meta_keywords"
+                                    placeholder="Введите ключевые слова"
+                                    value="{{ old('meta_keywords') }}"
+                                >
                                 @error('meta_keywords')
                                     <small class="text-danger error-text title_error">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">Мета описание</label>
-                                <textarea class="form-control" name="meta_description" placeholder="Введите мета-описание"></textarea>
+                                <textarea
+                                    class="form-control"
+                                    name="meta_description"
+                                    placeholder="Введите мета-описание"
+                                >{{ old('meta_description') }}</textarea>
                                 @error('meta_description')
                                     <small class="text-danger error-text title_error">{{ $message }}</small>
                                 @enderror
@@ -110,6 +126,7 @@
                                 name="tags"
                                 placeholder="Введите теги"
                                 data-role="tagsinput"
+                                value="{{ old('tags') }}"
                             >
                         </div>
                         <hr />

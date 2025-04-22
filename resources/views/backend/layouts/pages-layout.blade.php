@@ -425,8 +425,8 @@
                         <span class="mtext"> События </span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('admin.add_post') }}">Добавить</a></li>
-                        <li><a href="{{ route('admin.posts') }}">Список услуг</a></li>
+                        <li><a href="{{ route('admin.add_post') }}">Добавить событие</a></li>
+                        <li><a href="{{ route('admin.posts') }}">Список событий</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
