@@ -87,7 +87,7 @@
 
             // Wait for images to load before displaying
             // Requires predefined image dimensions
-            // If 'auto' - will zoom in thumbnail if 'width' and 'height' attributes are found
+            // If 'auto' - will zoom in thumb if 'width' and 'height' attributes are found
             preload : "auto"
 
         },
@@ -133,7 +133,7 @@
         // Open/close animation type
         // Possible values:
         //   false            - disable
-        //   "zoom"           - zoom images from/to thumbnail
+        //   "zoom"           - zoom images from/to thumb
         //   "fade"
         //   "zoom-in-out"
         //
@@ -143,7 +143,7 @@
         animationDuration : 500,
 
         // Should image change opacity while zooming
-        // If opacity is "auto", then opacity will be changed if image and thumbnail have different aspect ratios
+        // If opacity is "auto", then opacity will be changed if image and thumb have different aspect ratios
         zoomOpacity : "auto",
 
         // Transition effect between slides
@@ -280,8 +280,8 @@
         },
 
         thumbs : {
-			autoStart   : false,                  // Display thumbnails on opening
-			hideOnClose : true,                   // Hide thumbnail grid when closing animation starts
+			autoStart   : false,                  // Display thumb on opening
+			hideOnClose : true,                   // Hide thumb grid when closing animation starts
 			parentEl    : '.fancybox-container',  // Container is injected into this element
 			axis        : 'y'                     // Vertical (y) or horizontal (x) scrolling
 		},
@@ -1397,7 +1397,7 @@
 
             if ( $what && ( slide.width || slide.height ) ) {
                 self.isAnimating = false;
-                
+
                 $.fancybox.stop( $what );
 
                 $.fancybox.setTranslate( $what, self.getFitPos( slide ) );
@@ -1647,7 +1647,7 @@
         },
 
 
-        // Use thumbnail image, if possible
+        // Use thumb image, if possible
         // ================================
 
         setImage : function( slide ) {
@@ -1721,7 +1721,7 @@
                 .appendTo( slide.$slide );
 
 
-            // If we have a thumbnail, we can display it while actual image is loading
+            // If we have a thumb, we can display it while actual image is loading
             // Users will not stare at black screen and actual image will appear gradually
             if ( slide.opts.preload !== false && slide.opts.width && slide.opts.height && ( slide.opts.thumb || slide.opts.$thumb ) ) {
 
@@ -2222,7 +2222,7 @@
         },
 
 
-        // Check if we can and have to zoom from thumbnail
+        // Check if we can and have to zoom from thumb
         //================================================
 
         getThumbPos : function( slide ) {
@@ -4598,7 +4598,7 @@
 // ==========================================================================
 //
 // Thumbs
-// Displays thumbnails in a grid
+// Displays thumb in a grid
 //
 // ==========================================================================
 ;(function (document, $) {
@@ -4615,8 +4615,8 @@
 			'</button>'
 		},
 		thumbs : {
-			autoStart   : false,                  // Display thumbnails on opening
-			hideOnClose : true,                   // Hide thumbnail grid when closing animation starts
+			autoStart   : false,                  // Display thumb on opening
+			hideOnClose : true,                   // Hide thumb grid when closing animation starts
 			parentEl    : '.fancybox-container',  // Container is injected into this element
 			axis        : 'y'                     // Vertical (y) or horizontal (x) scrolling
 		}
@@ -4641,7 +4641,7 @@
 
 			instance.Thumbs = self;
 
-			// Enable thumbs if at least two group items have thumbnails
+			// Enable thumbs if at least two group items have thumb
 			var first  = instance.group[0],
 				second = instance.group[1];
 
@@ -4707,7 +4707,7 @@
 				width  = this.naturalWidth	|| this.width;
 				height = this.naturalHeight	|| this.height;
 
-				// Calculate thumbnail dimensions; center vertically and horizontally
+				// Calculate thumb dimensions; center vertically and horizontally
 				widthRatio  = width  / thumbWidth;
 				heightRatio = height / thumbHeight;
 

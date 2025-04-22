@@ -225,12 +225,12 @@ class Dropzone extends Emitter {
       paramName: "file",
 
       /**
-       * Whether thumbnails for images should be generated
+       * Whether thumb for images should be generated
        */
       createImageThumbnails: true,
 
       /**
-       * In MB. When the filename exceeds this limit, the thumbnail will not be generated.
+       * In MB. When the filename exceeds this limit, the thumb will not be generated.
        */
       maxThumbnailFilesize: 10,
 
@@ -563,7 +563,7 @@ class Dropzone extends Emitter {
 
 
       /**
-       * Gets called to calculate the thumbnail dimensions.
+       * Gets called to calculate the thumb dimensions.
        *
        * It gets `file`, `width` and `height` (both may be `null`) as parameters and must return an object containing:
        *
@@ -792,12 +792,12 @@ class Dropzone extends Emitter {
         return this._updateMaxFilesReachedClass();
       },
 
-      // Called when a thumbnail has been generated
+      // Called when a thumb has been generated
       // Receives `file` and `dataUrl`
       thumbnail(file, dataUrl) {
         if (file.previewElement) {
           file.previewElement.classList.remove("dz-file-preview");
-          for (let thumbnailElement of file.previewElement.querySelectorAll("[data-dz-thumbnail]")) {
+          for (let thumbnailElement of file.previewElement.querySelectorAll("[data-dz-thumb]")) {
             thumbnailElement.alt = file.name;
             thumbnailElement.src = dataUrl;
           }
@@ -1654,7 +1654,7 @@ class Dropzone extends Emitter {
 
       file.dataURL = fileReader.result;
 
-      // Don't bother creating a thumbnail for SVG images since they're vector
+      // Don't bother creating a thumb for SVG images since they're vector
       if (file.type === "image/svg+xml") {
         if (callback != null) {
           callback(fileReader.result);

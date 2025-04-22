@@ -2,7 +2,7 @@
  * elFinder - file manager for web
  * Version 2.1.65 (2024-01-05)
  * http://elfinder.org
- * 
+ *
  * Copyright 2009-2024, Studio 42
  * Licensed under a 3-clauses BSD license
  */
@@ -467,7 +467,7 @@
 .elfinder-dialog-edit .elfinder-toast > div {
     width: 280px;
 }
- 
+
 .elfinder-edit-onlineconvert-button {
     display: inline-block;
     width: 180px;
@@ -1854,7 +1854,7 @@ div.elfinder {
     left: 0px;
 }
 
-/* icon/thumbnail */
+/* icon/thumb */
 .elfinder-cwd-icon {
     display: block;
     width: 48px;
@@ -2032,7 +2032,7 @@ div.elfinder {
     content: 'c++'
 }
 
-/* thumbnail image */
+/* thumb image */
 .elfinder-cwd-icon.elfinder-cwd-bgurl {
     background-position: center center;
     background-repeat: no-repeat;
@@ -2040,13 +2040,13 @@ div.elfinder {
     background-size: contain;
 }
 
-/* thumbnail self */
+/* thumb self */
 .elfinder-cwd-icon.elfinder-cwd-bgurl.elfinder-cwd-bgself {
     -moz-background-size: cover;
     background-size: cover;
 }
 
-/* thumbnail crop*/
+/* thumb crop*/
 .elfinder-cwd-icon.elfinder-cwd-bgurl {
     -moz-background-size: cover;
     background-size: cover;
@@ -2081,13 +2081,13 @@ div.elfinder {
     transform: scale(.6);
 }
 
-/* thumbnail image and draging icon */
+/* thumb image and draging icon */
 .elfinder-cwd-icon.elfinder-cwd-icon-drag {
     width: 48px;
     height: 48px;
 }
 
-/* thumbnail image and draging icon overlay none */
+/* thumb image and draging icon overlay none */
 .elfinder-cwd-icon.elfinder-cwd-icon-drag:before,
 .elfinder-cwd-icon.elfinder-cwd-icon-drag:after,
 .elfinder-cwd-icon-image.elfinder-cwd-bgurl:after,
@@ -2658,7 +2658,7 @@ tr.elfinder-cwd-file td .elfinder-cwd-select {
     right: 0;
 }
 
-/* type badge, thumbnail image overlay */
+/* type badge, thumb image overlay */
 .elfinder-cwd-view-list .elfinder-cwd-icon:before,
 .elfinder-cwd-view-list .elfinder-cwd-icon:after {
     content: none;

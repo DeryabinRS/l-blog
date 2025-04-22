@@ -10,9 +10,12 @@ use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
-    public function allPosts()
+    public function allPosts(Request $request)
     {
-        return view('backend.pages.posts.store');
+        $data = [
+            'pageTitle' => 'События',
+        ];
+        return view('backend.pages.posts.store', $data);
     }
 
     public function addPost(Request $request)
@@ -38,6 +41,8 @@ class PostController extends Controller
 
         if ($request->hasFile('featured_image')) {
             $path = 'images/posts/';
+            $thumbnail_path = $path.'thumb/';
+
             $file = $request->file('featured_image');
             $fileName = $file->getClientOriginalName();
             $newFileName = time().'_'.$fileName;
@@ -45,19 +50,20 @@ class PostController extends Controller
             $upload = $file->move($path, $newFileName);
             if ($upload) {
                 /** Resize image */
-
-                $thumbnail_path = $path.'thumbnail/';
                 if (!File::isDirectory($thumbnail_path)) {
                     File::makeDirectory($thumbnail_path, 0777, true, true);
                 }
 
                 // Resize
                 $img = Image::make($path.$newFileName);
-                $img->resize(600, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save($path.$newFileName);
+
+//                $img->resize(600, null, function ($constraint) {
+//                    $constraint->aspectRatio();
+//                })->save($path.$newFileName);
+
+                $img->fit(650, 650)->save($path.$newFileName);
                 // Thumbnail
-                $img->fit(250, 250)->save($thumbnail_path.'thumb_'.$newFileName);
+                $img->fit(200, 200)->save($thumbnail_path.'thumb_'.$newFileName);
 
                 $post = new Post();
                 $post->author_id = auth()->id();
@@ -81,5 +87,24 @@ class PostController extends Controller
                 return redirect()->route('admin.posts')->with('fail', 'Ошибка добавления файла');
             }
         }
+    }
+
+    public function editPost(Request $request, $id = null)
+    {
+        $post = Post::findOrFail($id);
+        $post_categories = PostCategory::all();
+
+        $data = [
+            'pageTitle' => 'Изменить событие',
+            'post' => $post,
+            'post_categories' => $post_categories,
+        ];
+
+        return view('backend.pages.posts.edit_post', $data);
+    }
+
+    public function updatePost(Request $request, $id = null)
+    {
+
     }
 }
