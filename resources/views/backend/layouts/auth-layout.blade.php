@@ -11,7 +11,7 @@
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href="/backend/vendors/images/favicon-32x32.png"
+        href="/assets/images/favicon.png"
     />
     <!-- Mobile Specific Metas -->
     <meta
@@ -33,6 +33,7 @@
     />
     <link rel="stylesheet" type="text/css" href="/backend/vendors/styles/style.css" />
     @stack('stylesheets')
+    @stack('head_scripts')
 </head>
 <body class="login-page">
 <div class="login-header box-shadow">
@@ -41,12 +42,22 @@
     >
         <div class="brand-logo">
             <a href="/">
-                <img src="{{ isset(settings()->site_logo) ? settings()->site_logo : '/images/settings/logo.svg' }}" alt="" />
+                <img src="{{ isset(settings()->site_logo) ? settings()->site_logo : '/assets/images/logo.png' }}" alt="" />
             </a>
         </div>
         <div class="login-menu">
             <ul>
-                <li><a href="register.html">Register</a></li>
+                <li>
+                    @if(Route::is('admin.register'))
+                        <a href="{{ route('admin.login') }}">
+                            Вход
+                        </a>
+                    @else
+                        <a href="{{ route('admin.register') }}">
+                            Регистрация
+                        </a>
+                    @endif
+                </li>
             </ul>
         </div>
     </div>

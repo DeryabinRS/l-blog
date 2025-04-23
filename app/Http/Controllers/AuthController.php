@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use App\Helpers\CMail;
+use App\Rules\ReCaptcha;
 
 class AuthController extends Controller
 {
@@ -198,5 +199,35 @@ class AuthController extends Controller
                 ->route('admin.reset_password_form', [ 'token' => $dbToken->token ])
                 ->with('fail', 'Ошибка изменения пароля. Попробуйте позже');
         }
+    }
+
+    public function registerForm()
+    {
+        return view('backend.pages.auth.register');
+    }
+
+    public function registerHandler(Request $request)
+    {
+        $request->validate([
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|min:6',
+            'g-recaptcha-response' => [new ReCaptcha],
+        ], [
+            'email.required' => 'Email is required',
+            'email.email' => 'Email is invalid',
+            'password.required' => 'Password is required',
+            'password.min' => 'Password must be at least 6 characters',
+        ]);
+
+        $user = new User();
+
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->email = $request->email;
+        $user->content = Hash::make($request->password);
+
+        $saved = $user->save();
     }
 }
