@@ -155,7 +155,7 @@
 @endpush
 @push('scripts')
     <script src="/backend/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
-    <script src="/ckeditor/ckeditor.js"></script>
+    <script src="/plugins/ckeditor/ckeditor.js"></script>
     <script>
         const loadFile = function(event) {
             const output = document.getElementById('featured_image_preview');

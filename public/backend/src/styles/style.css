@@ -1025,7 +1025,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before, tabl
 .header{
 	position: fixed;
 	height: 70px;
-	width: calc(100% - 280px);
+	width: calc(100% - 300px);
 	background: #ffffff;
 	right: 0;
 	top: 0;
@@ -1314,7 +1314,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before, tabl
 	font-size: 20px;
 }
 .brand-logo{
-	width: 280px;
+	width: 300px;
 	height: 70px;
 	border-bottom: 1px solid rgba(0,0,0,0.1);
 }
@@ -1358,7 +1358,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before, tabl
 	position: fixed;
 	left: 0;
 	top: 0;
-	width: 280px;
+	width: 300px;
 	height: 100%;
 	z-index: 1000;
 	background: #142127;

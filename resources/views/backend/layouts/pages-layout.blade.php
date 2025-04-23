@@ -8,23 +8,11 @@
 
     <!-- Site favicon -->
     <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="/backend/vendors/images/apple-touch-icon.png"
-    />
-    <link
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href="/backend/vendors/images/favicon-32x32.png"
+        href="/assets/images/favicon.png"
     />
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="/backend/vendors/images/favicon-16x16.png"
-    />
-
     <!-- Mobile Specific Metas -->
     <meta
         name="viewport"
@@ -47,7 +35,7 @@
     <link
         rel="stylesheet"
         type="text/css"
-        href="/backend/src/plugins/sweetalert2/sweetalert2.css"
+        href="/plugins/sweetalert2/sweetalert2.css"
     />
     @kropifyStyles
     @stack('stylesheets')
@@ -246,9 +234,9 @@
 <div class="left-side-bar">
     <div class="brand-logo">
         <a href="/">
-            <img src="{{ isset(settings()->site_logo) ? settings()->site_logo : '/images/settings/logo.svg' }}" alt="" class="dark-logo site_logo"/>
+            <img src="{{ isset(settings()->site_logo) ? settings()->site_logo : '/assets/images/logo.png' }}" alt="" class="dark-logo site_logo"/>
             <img
-                src="{{ isset(settings()->site_logo) ? settings()->site_logo : '/images/settings/logo.svg' }}"
+                src="{{ isset(settings()->site_logo) ? settings()->site_logo : '/assets/images/logo.png' }}"
                 alt=""
                 class="light-logo site_logo"
             />
@@ -359,7 +347,7 @@
 <script src="/backend/vendors/scripts/script.min.js"></script>
 <script src="/backend/vendors/scripts/process.js"></script>
 <script src="/backend/vendors/scripts/layout-settings.js"></script>
-<script src="/backend/src/plugins/sweetalert2/sweetalert2.all.js"></script>
+<script src="/plugins/sweetalert2/sweetalert2.all.js"></script>
 @kropifyScripts
 <script>
     window.addEventListener('showToast', function (event) {

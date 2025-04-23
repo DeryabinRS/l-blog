@@ -34,7 +34,7 @@ class Settings extends Component
 //            $this->site_favicon = $settings->site_favicon;
         }
 
-        $this->site_logo = isset($settings->site_logo) ? $settings->site_logo : asset('/images/settings/logo.svg');;
+        $this->site_logo = isset($settings->site_logo) ? $settings->site_logo : asset('/assets/images/logo.png');;
     }
 
     public function updateSiteInfo()

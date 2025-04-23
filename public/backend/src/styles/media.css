@@ -13,7 +13,7 @@
 	.device-usage-chart .width-50-p{width: 100%;}
 }
 @media (min-width: 1301px){
-	.sidebar-shrink .left-side-bar.open, .sidebar-shrink .left-side-bar{left: -281px;}
+	.sidebar-shrink .left-side-bar.open, .sidebar-shrink .left-side-bar{left: -301px;}
 	.sidebar-shrink .header{width: 100%;}
 	.sidebar-shrink .main-container{padding-left: 20px;}
 }
@@ -21,7 +21,7 @@
 	.main-container{padding-left: 5px; padding-right: 5px;}
 	.header-left .menu-icon{display: flex;}
 	.header{width: 100%;}
-	.left-side-bar{left: -281px;}
+	.left-side-bar{left: -301px;}
 	.left-side-bar .close-sidebar{display: block;}
 	.left-side-bar:before{display: block; opacity: 0; visibility: hidden;}
 	.left-side-bar.open:before{opacity: 1; visibility: visible; display: none;}

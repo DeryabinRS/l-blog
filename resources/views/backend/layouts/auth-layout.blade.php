@@ -8,23 +8,11 @@
 
     <!-- Site favicon -->
     <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="/backend/vendors/images/apple-touch-icon.png"
-    />
-    <link
         rel="icon"
         type="image/png"
         sizes="32x32"
         href="/backend/vendors/images/favicon-32x32.png"
     />
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="/backend/vendors/images/favicon-16x16.png"
-    />
-
     <!-- Mobile Specific Metas -->
     <meta
         name="viewport"
@@ -69,7 +57,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6 col-lg-7">
-                <img src="/backend/vendors/images/login-page-img.png" alt="" />
+                <img src="/backend/src/images/login-page-img.png" alt="" />
             </div>
             <div class="col-md-6 col-lg-5">
                 @yield('content')
