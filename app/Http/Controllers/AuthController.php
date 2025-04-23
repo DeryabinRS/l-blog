@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\UserStatus;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -175,10 +176,11 @@ class AuthController extends Controller
         // Send notificatio email to this user email address that contain new password
         $data = array(
             'user' => $user,
-            'new_password' => $request->new_password
+            'password' => $request->new_password,
+            'title' => 'Восстановление пароля',
         );
 
-        $mail_body = view('email-templates.password-change-template', $data)->render();
+        $mail_body = view('email-templates.user-password', $data)->render();
 
         $mailConfig = array(
             'recipient_address' => $user->email,
@@ -211,9 +213,9 @@ class AuthController extends Controller
         $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'email' => 'required|email|exists:users,email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
-            'g-recaptcha-response' => [new ReCaptcha],
+//            'g-recaptcha-response' => [new ReCaptcha],
         ], [
             'email.required' => 'Email is required',
             'email.email' => 'Email is invalid',
@@ -226,8 +228,33 @@ class AuthController extends Controller
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
-        $user->content = Hash::make($request->password);
+        $user->password = Hash::make($request->password);
 
         $saved = $user->save();
+
+        if ($saved) {
+            $data = array(
+                'user' => $user,
+                'password' => $request->password,
+                'title' => 'Регистрация нового пользователя',
+            );
+
+            $mail_body = view('email-templates.user-password-template', $data)->render();
+
+            $mailConfig = array(
+                'recipient_address' => $user->email,
+                'recipient_name' => $user->firstname . ' ' . $user->lastname,
+                'subject' => 'Регистрация нового пользователя',
+                'body' => $mail_body,
+            );
+
+            if (CMail::send($mailConfig)) {
+                return redirect()->route('admin.login')->with('success', 'На Ваш Email направлено письмо с условиями активации аккаунта');
+            } else {
+                return redirect()->route('admin.login')->with('fail', 'Ошибка отправки сообщения');
+            }
+        } else {
+            return redirect()->route('admin.login')->with('fail', 'Ошибка регистрации пользователя');
+        }
     }
 }

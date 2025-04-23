@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
@@ -55,3 +57,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/post/update', 'updatePost')->name('update_post');
     });
 });
+
+/**
+ * VERIFICATION EMAIL
+ */
+
+

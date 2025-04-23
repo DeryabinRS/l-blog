@@ -76,12 +76,12 @@
                 <small class="text-danger ml-1 mb-1">{{ $message }}</small>
                 @enderror
             </div>
-            <div class="mb-4">
-                <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
-                @if($errors->has('g-recaptcha-response'))
-                    <small class="text-danger">{{ $errors->first('g-recaptcha-response') }}</small>
-                @endif
-            </div>
+{{--            <div class="mb-4">--}}
+{{--                <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>--}}
+{{--                @if($errors->has('g-recaptcha-response'))--}}
+{{--                    <small class="text-danger">{{ $errors->first('g-recaptcha-response') }}</small>--}}
+{{--                @endif--}}
+{{--            </div>--}}
             <div class="row">
                 <div class="col-sm-12">
                     <div class="input-group mb-0">
