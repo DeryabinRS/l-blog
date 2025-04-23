@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <a class="btn btn-secondary" href="{{ route('admin.posts') }}">
-                    Список событий
+                    <i class="icon-copy bi bi-list"></i> Список событий
                 </a>
             </div>
         </div>

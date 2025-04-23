@@ -11,7 +11,7 @@ class PostCategories extends Component
     use WithPagination;
 
     public $isUpdatePostCategoryMode = false;
-    public $category_id, $category_name, $category_description;
+    public $category_id, $category_name, $category_description, $icon;
 
     public $perPage = 25;
 
@@ -39,6 +39,7 @@ class PostCategories extends Component
         $this->category_id = null;
         $this->category_name = null;
         $this->category_description = null;
+        $this->icon = null;
     }
 
     public function createPostCategoryForm()
@@ -46,6 +47,7 @@ class PostCategories extends Component
         $this->category_id = null;
         $this->category_name = null;
         $this->category_description = null;
+        $this->icon = null;
         $this->isUpdatePostCategoryMode = false;
         $this->showPostCategoryModalForm();
     }
@@ -62,6 +64,7 @@ class PostCategories extends Component
         $post_category = new PostCategory();
         $post_category->name = $this->category_name;
         $post_category->description = $this->category_description;
+        $post_category->icon = $this->icon;
         $saved = $post_category->save();
 
         if ($saved) {
@@ -76,6 +79,7 @@ class PostCategories extends Component
     {
         $post_category = PostCategory::findOrFail($id);
         $this->category_id = $post_category->id;
+        $this->icon = $post_category->icon;
         $this->category_name = $post_category->name;
         $this->category_description = $post_category->description;
         $this->isUpdatePostCategoryMode = true;
@@ -94,6 +98,7 @@ class PostCategories extends Component
         ]);
 
         $post_category->name = $this->category_name;
+        $post_category->icon = $this->icon;
         $post_category->description = $this->category_description;
         $saved = $post_category->save();
 
@@ -113,14 +118,23 @@ class PostCategories extends Component
     public function deletePostCategory($id)
     {
         $post_category = PostCategory::findOrFail($id);
-
-        $deleted = $post_category->delete();
-
-        if ($deleted) {
-            $this->dispatch('showToast', ['type' => 'success', 'message' => 'Данные успешно удалены']);
+        $countPosts = $post_category->posts()->count();
+        if ($countPosts > 0) {
+            $this->dispatch('showToast', [
+                'type' => 'error',
+                'text' => 'Данная категория не может быть удалена т.к. содержит ('.$countPosts.') связанные записи.',
+                'timer' => 5000,
+                'toast' => ' ',
+                'position' => 'center',
+            ]);
         } else {
-            $this->dispatch('showToast', ['type' => 'error', 'message' => 'Ошибка удаления данных']);
+            $deleted = $post_category->delete();
+
+            if ($deleted) {
+                $this->dispatch('showToast', ['type' => 'success', 'message' => 'Данные успешно удалены']);
+            } else {
+                $this->dispatch('showToast', ['type' => 'error', 'message' => 'Ошибка удаления данных']);
+            }
         }
     }
-
 }

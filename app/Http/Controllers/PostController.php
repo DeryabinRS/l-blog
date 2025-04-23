@@ -134,7 +134,6 @@ class PostController extends Controller
             }
         }
 
-        $post->author_id = auth()->id();
         $post->post_category = $request->post_category;
         $post->title = $request->title;
         $post->content = $request->{'content'};

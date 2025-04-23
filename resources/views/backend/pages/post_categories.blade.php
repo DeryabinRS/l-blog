@@ -23,7 +23,6 @@
                 cancelButtonClass: 'btn btn-danger',
                 confirmButtonText: 'Удалить'
             }).then(function (data) {
-                console.log(data.value)
                 if (data.value) {
                     Livewire.dispatch('deletePostCategory', [id]);
                 }

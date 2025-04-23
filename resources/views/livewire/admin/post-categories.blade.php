@@ -14,15 +14,19 @@
                     <table class="table table-striped">
                         <thead class="bg-secondary text-white">
                             <th scope="col">#</th>
+                            <th scope="col">ico</th>
                             <th scope="col">Наименование</th>
+                            <th scope="col">Cобытий</th>
                             <th scope="col">Действия</th>
                         </thead>
                         <tbody>
                         @forelse($post_categories as $item)
                             <tr>
                                 <td width="30">{{ $item->id }}</td>
+                                <td width="30">{!! $item->icon !!}</td>
                                 <td>{{ $item->name }}</td>
-                                <td width="80">
+                                <td width="100" align="center">{{ $item->posts->count() }}</td>
+                                <td width="100">
                                     <div class="table-actions">
                                         <a href="javascript:;" wire:click="editPostCategoryForm({{ $item->id }})" class="text-primary mx-2">
                                             <i class="dw dw-edit2"></i>
@@ -87,6 +91,26 @@
                             placeholder="Введите название категории"
                         >
                         @error('category_name')
+                            <small class="text-danger ml-1">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="">
+                            Наименование html код иконки
+                            <small>
+                                (Не обязательно)<br />
+                                Пример: <i class="fa fa-cog" aria-hidden="true"></i> - {{'<i class="fa fa-cog"></i>'}}<br/>
+                                <a href="https://fontawesome.ru/all-icons/" class="text-primary" target="_blank">Коллекция иконок</a>
+                            </small>
+                        </label>
+                        <input
+                            wire:model="icon"
+                            type="text"
+                            class="form-control"
+                            name="icon"
+                            placeholder="Введите html код иконки"
+                        >
+                        @error('icon')
                             <small class="text-danger ml-1">{{ $message }}</small>
                         @enderror
                     </div>
