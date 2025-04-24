@@ -1,0 +1,14 @@
+
+
+.section-7 {
+    .news_box { display: flex; }
+    .news_box .img { min-width: 166px; }
+    .news_box .desc { padding: 0 30px; }
+    .news_box .desc h5 { font-weight: 500; }
+    .news_box .desc p {
+        margin: 25px 0 0;
+        font-weight: 300;
+        line-height: 27px;
+        font-size: 16px;
+    }
+}

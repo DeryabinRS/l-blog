@@ -21,6 +21,6 @@ class GeneralSetting extends Model
 
     public function getSiteLogoAttribute($value)
     {
-        return $value ? asset('/images/settings/' . $value) : asset('/images/settings/logo.svg');
+        return $value ? asset('/images/settings/' . $value) : asset('/assets/images/logo.png');
     }
 }
