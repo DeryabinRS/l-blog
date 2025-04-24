@@ -4,7 +4,7 @@
             <div class="pd-20 card-box mb-30">
                 <div class="clearfix">
                     <div class="pull-left">
-                        <h4 class="h4 text-blue">Категории событий</h4>
+                        <h4 class="h4 text-secondary">Категории событий</h4>
                     </div>
                     <div class="pull-right">
                         <a href="javascript:;" wire:click="createPostCategoryForm()" class="btn btn-primary btn-sm">Добавить</a>

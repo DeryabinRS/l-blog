@@ -49,11 +49,11 @@
             <ul>
                 <li>
                     @if(Route::is('admin.register'))
-                        <a href="{{ route('admin.login') }}">
+                        <a href="{{ route('admin.login') }}" class="text-secondary">
                             Вход
                         </a>
                     @else
-                        <a href="{{ route('admin.register') }}">
+                        <a href="{{ route('admin.register') }}" class="text-secondary">
                             Регистрация
                         </a>
                     @endif

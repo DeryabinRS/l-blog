@@ -151,10 +151,10 @@
     </form>
 @endsection
 @push('stylesheets')
-    <link rel="stylesheet" href="/backend/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
+    <link rel="stylesheet" href="/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
 @endpush
 @push('scripts')
-    <script src="/backend/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+    <script src="/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
     <script src="/plugins/ckeditor/ckeditor.js"></script>
     <script>
         const loadFile = function(event) {

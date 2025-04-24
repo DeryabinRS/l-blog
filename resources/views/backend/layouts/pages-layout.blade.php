@@ -7,17 +7,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Site favicon -->
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="/assets/images/favicon.png"
-    />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon.png" />
     <!-- Mobile Specific Metas -->
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <!-- Google Font -->
     <link
@@ -26,17 +18,9 @@
     />
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/backend/vendors/styles/core.css"/>
-    <link
-        rel="stylesheet"
-        type="text/css"
-        href="/backend/vendors/styles/icon-font.min.css"
-    />
+    <link rel="stylesheet" type="text/css" href="/backend/vendors/styles/icon-font.min.css" />
     <link rel="stylesheet" type="text/css" href="/backend/vendors/styles/style.css"/>
-    <link
-        rel="stylesheet"
-        type="text/css"
-        href="/plugins/sweetalert2/sweetalert2.css"
-    />
+    <link rel="stylesheet" type="text/css" href="/plugins/sweetalert2/sweetalert2.css" />
     @kropifyStyles
     @stack('stylesheets')
 </head>
@@ -300,7 +284,7 @@
                 </li>
                 @if(auth()->user()->role == 'superAdmin')
                 <li>
-                    <div class="sidebar-small-cap">Настройки</div>
+                    <div class="sidebar-small-cap text-secondary">Настройки</div>
                 </li>
                 @endif
                 <li>
@@ -351,8 +335,6 @@
 @kropifyScripts
 <script>
     window.addEventListener('showToast', function (event) {
-        //Custom Position Message
-
         const configSwal = {
             toast: event.detail[0]?.toast === undefined ? true : false,
             position: event.detail[0].position || 'top-end',

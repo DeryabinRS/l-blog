@@ -8,9 +8,9 @@
 {{--        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />--}}
 {{--        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>--}}
 {{--        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>--}}
-        <link rel="stylesheet" href="/assets/js/jquery-ui-1.14.1/jquery-ui.min.css" />
-        <script src="/assets/js/jquery-3.7.1.min.js"></script>
-        <script src="/assets/js/jquery-ui-1.14.1/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="/assets/plugins/jquery/jquery-ui-1.14.1/jquery-ui.min.css" />
+        <script src="/assets/plugins/jquery/jquery-3.7.1.min.js"></script>
+        <script src="/assets/plugins/jquery/jquery-ui-1.14.1/jquery-ui.min.js"></script>
 
         <!-- elFinder CSS (REQUIRED) -->
         <link rel="stylesheet" type="text/css" href="{{ asset($dir.'/css/elfinder.min.css') }}">

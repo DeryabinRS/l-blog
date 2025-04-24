@@ -8,7 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.pages.home');
 });
 
 /**

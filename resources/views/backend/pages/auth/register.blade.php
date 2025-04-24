@@ -6,7 +6,7 @@
 @section('content')
     <div class="login-box bg-white box-shadow border-radius-10">
         <div class="login-title">
-            <h2 class="text-center text-primary">Регистрация</h2>
+            <h2 class="text-center text-secondary">Регистрация</h2>
         </div>
         <form action="{{ route('admin.register_handler') }}" method="POST">
 
