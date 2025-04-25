@@ -23,7 +23,11 @@ class UserController extends Controller
         $data = [
             'pageTitle' => 'Изменить параметры пользователя',
             'user' => $user,
-            'user_statuses' => ['active', 'pending', 'blocked'],
+            'user_statuses' => [
+                'active',
+                'pending',
+                'blocked'
+            ],
         ];
 
         return view('backend.pages.users.edit', $data);

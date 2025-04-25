@@ -35,11 +35,6 @@ class Index extends Component
         $this->resetPage();
     }
 
-    public function deleteUser($id)
-    {
-        $this->dispatch('deleteUser', ['id' => $id]);
-    }
-
     public function render()
     {
         return view('livewire.admin.users.index', [

@@ -50,11 +50,11 @@ class AuthController extends Controller
         );
 
         if(Auth::attempt($creds)) {
-            if (auth()->user()->status === UserStatus::INACTIVE) {
+            if (auth()->user()->status === UserStatus::BLOCKED) {
                 Auth::logout();
                 $request->session()->invalidate();
                 $request->session()->regenerateToken();
-                return redirect()->route('admin.login')->withInput()->with('fail', 'Пользователь не активен');
+                return redirect()->route('admin.login')->withInput()->with('fail', 'Пользователь заблокирован');
             }
 
             if (auth()->user()->status === UserStatus::PENDING) {
