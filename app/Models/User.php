@@ -75,4 +75,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Post::class, 'author_id', 'id');
     }
+
+    public function isAdmin()
+    {
+        return ($this->role === 'superAdmin' || $this->role === 'admin') ? true : false;
+    }
+
+    public function scopeSearch($query, $term)
+    {
+        $term = "%$term%";
+        $query->where(function ($query) use ($term) {
+            $query->where('email', 'like', $term)
+                ->orWhere('firstname', 'like', "%" . $term . "%")
+                ->orWhere('lastname', 'like', "%" . $term . "%");
+        });
+    }
 }

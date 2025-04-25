@@ -12,67 +12,50 @@
         </div>
     </div>
 
-    <div class="section-7">
-        <div class="title_box text-center">
-            <h2>Latest News From Us</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet.
-            </p>
-        </div>
+    <div class="section-news">
         <div class="container">
+            <div class="title_box">
+                <h2>Полезная информация</h2>
+            </div>
             <div class="row">
+                @if(!empty($firstPost))
                 <div class="col-lg-6 mt-5">
                     <div class="news_general">
-                        <div class="text-center">
-                            <a href="#"><img src="img/news/image1.jpg" alt="new1" class="img-fluid"></a>
+                        <div class="text-center img">
+                            <a href="#"><img src="/images/posts/{{$firstPost['featured_image']}}" alt="{{$firstPost['title']}}" class="img-fluid"></a>
                         </div>
                         <div class="mt-4">
-                            <h4><a href="#">The master bedroom suite is phenomenally spacious</a></h4>
+                            <h4><a href="#">{{$firstPost['title']}}</a></h4>
                         </div>
                         <div class="mt-4">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                {{$firstPost['content']}}
                             </p>
                         </div>
                         <div class="link">
                             <a href="#" class="arrow_link">
                                 Continue Reading
-                                &nbsp;
-                                <svg width="68" height="16" viewBox="0 0 68 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M67.7071 8.70711C68.0976 8.31658 68.0976 7.68342 67.7071 7.29289L61.3431 0.928932C60.9526 0.538408 60.3195 0.538408 59.9289 0.928932C59.5384 1.31946 59.5384 1.95262 59.9289 2.34315L65.5858 8L59.9289 13.6569C59.5384 14.0474 59.5384 14.6805 59.9289 15.0711C60.3195 15.4616 60.9526 15.4616 61.3431 15.0711L67.7071 8.70711ZM0 9H67V7H0V9Z" fill="#0063DD"/>
-                                </svg>
                             </a>
                         </div>
                     </div>
                 </div>
+                @endif
                 <div class="col-lg-6">
-                    <div class="news_box mt-5">
-                        <div class="img"><a href="#"><img src="img/news/image2.jpg" alt="new1" class="img-fluid"></a></div>
-                        <div class="desc">
-                            <h5>The master bedroom suite is phenomeny spacious</h5>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="news_box mt-4">
-                        <div class="img"><a href="#"><img src="img/news/image3.jpg" alt="new1" class="img-fluid"></a></div>
-                        <div class="desc">
-                            <h5>The master bedroom suite is phenomeny spacious</h5>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="news_box mt-4">
-                        <div class="img"><a href="#"><img src="img/news/image4.jpg" alt="new1" class="img-fluid"></a></div>
-                        <div class="desc">
-                            <h5>The master bedroom suite is phenomeny spacious</h5>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
-                            </p>
-                        </div>
-                    </div>
+                    @if(!empty($posts))
+                        @foreach($posts as $item)
+                            <div class="news_box mt-5">
+                                <div class="row">
+                                    <div class="col-md-4 img"><a href="#"><img src="/images/posts/{{$item['featured_image']}}" alt="{{$item['title']}}" alt="new1" class="img-fluid"></a></div>
+                                    <div class="col-md-8 desc">
+                                        <h5>{{$item['title']}}</h5>
+                                        <p>
+                                            {{$item['content']}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>

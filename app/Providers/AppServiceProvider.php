@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\UserRole;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Auth\Middleware\Authenticate;
@@ -31,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
         Authenticate::redirectUsing(function () {
             Session::flash('fail', 'Пользователь должен быть авторизован');
             return route('admin.login');
+        });
+
+        Blade::if('admin', function () {
+            return optional(auth()->user())->isAdmin();
         });
     }
 }

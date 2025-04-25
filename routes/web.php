@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -7,9 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 
-Route::get('/', function () {
-    return view('frontend.pages.home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /**
  * TESTING ROUTES
@@ -47,14 +47,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 Route::get('/post-categories', 'postCategoriesPage')->name('post_categories');
             });
         });
-    });
 
-    Route::controller(PostController::class)->group(function () {
-        Route::get('/post/new', 'addPost')->name('add_post');
-        Route::post('/create-post', 'createPost')->name('create_post');
-        Route::get('/posts', 'allPosts')->name('posts');
-        Route::get('/post/{id}/edit', 'editPost')->name('edit_post');
-        Route::post('/post/update', 'updatePost')->name('update_post');
+        Route::controller(PostController::class)->group(function () {
+            Route::get('/post/new', 'addPost')->name('add_post');
+            Route::post('/create-post', 'createPost')->name('create_post');
+            Route::get('/posts', 'allPosts')->name('posts');
+            Route::get('/post/{id}/edit', 'editPost')->name('edit_post');
+            Route::post('/post/update', 'updatePost')->name('update_post');
+        });
+
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/users', 'allUsersAdmin')->name('users');
+            Route::get('/user/{id}/edit', 'editUserAdmin')->name('edit_user');
+        });
     });
 });
 

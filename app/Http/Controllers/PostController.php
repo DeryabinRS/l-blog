@@ -15,7 +15,7 @@ class PostController extends Controller
         $data = [
             'pageTitle' => 'События',
         ];
-        return view('backend.pages.posts.store', $data);
+        return view('backend.pages.posts.index', $data);
     }
 
     public function addPost(Request $request)
@@ -92,7 +92,7 @@ class PostController extends Controller
             'post_categories' => $post_categories,
         ];
 
-        return view('backend.pages.posts.edit_post', $data);
+        return view('backend.pages.posts.edit', $data);
     }
 
     public function updatePost(Request $request)
@@ -155,7 +155,7 @@ class PostController extends Controller
     private function makeFeaturedImage($path, $newFileName, $thumbnailPath)
     {
         $img = Image::make($path.$newFileName);
-        $img->fit(650, 650)->save($path.$newFileName);
+        $img->fit(650, 450)->save($path.$newFileName);
         $img->fit(200, 200)->save($thumbnailPath.'thumb_'.$newFileName);
     }
 }

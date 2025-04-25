@@ -36,11 +36,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Pages</a>
                     </li>
-                    @auth
+                    @admin
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
                         </li>
-                    @endif
+                    @endadmin
                 </ul>
             </div>
         </div>

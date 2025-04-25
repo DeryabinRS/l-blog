@@ -109,7 +109,7 @@
                     <div class="card-header weight-500">Параметры события</div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="">Изображение <small class="text-danger">(800px*800px)</small>:</label>
+                            <label for="">Изображение <small class="text-danger">(650px*450px)</small>:</label>
                             <div class="d-block mb-3" style="max-width: 100%">
                                 <img src="/images/posts/{{ $post->featured_image }}" alt="" class="img-thumbnail img-fluid" id="featured_image_preview">
                             </div>
