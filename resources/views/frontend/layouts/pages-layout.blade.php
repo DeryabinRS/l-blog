@@ -4,11 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@yield('pageTitle')</title>
+
+    <meta name="keywords" content="{{ isset(settings()->site_meta_keywords) ? settings()->site_meta_keywords : '' }}" />
+    <meta name="description" content="{{ isset(settings()->site_meta_description) ? settings()->site_meta_description : '' }}">
     <link rel="icon" href="/assets/images/favicon.png" type="image/x-icon" />
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/plugins/bootstrap/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/assets/styles/index.css"/>
-
+    {{ isset(settings()->site_title) ? settings()->site_title : '' }}
     @stack('stylesheets')
 </head>
 <body>
@@ -17,7 +20,10 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed">
         <div class="container-xxl">
             <a class="navbar-brand" href="/">
-                <img src="{{ settings()->site_logo }}" alt="{{ settings()->site_title }}">
+                <img
+                    src="{{ isset(settings()->site_logo) ? settings()->site_logo : '/assets/images/logo.png' }}"
+                    alt="{{ isset(settings()->site_title) ? settings()->site_title : '' }}"
+                >
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -50,7 +56,11 @@
 <footer>
     <div class="container-xxl">
         <a class="navbar-brand" href="/">
-            <img width="100" src="{{ settings()->site_logo }}" alt="{{ settings()->site_title }}">
+            <img
+                width="100"
+                src="{{ isset(settings()->site_logo) ? settings()->site_logo : '/assets/images/logo.png' }}"
+                alt="{{ isset(settings()->site_title) ? settings()->site_title : '' }}"
+            >
         </a>
     </div>
 </footer>
