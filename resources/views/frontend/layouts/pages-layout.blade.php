@@ -42,11 +42,37 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Pages</a>
                     </li>
-                    @admin
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
-                        </li>
-                    @endadmin
+                    @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="user-icon">
+                                <img style="width:30px" class="bg-info rounded-circle" src="{{ auth()->user()->picture }}" alt=""/>
+                            </span>
+                            <span class="user-name">{{ auth()->user()->firstname . ' ' . auth()->user()->lastname }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+{{--                            <li><a class="dropdown-item" href="#">Profile</a></li>--}}
+                            @admin
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                            </li>
+                            @endadmin
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a
+                                    class="dropdown-item"
+                                    href="{{ route('admin.logout') }}"
+                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                                >
+                                    <i class="dw dw-logout"></i> Log Out
+                                </a>
+                                <form action="{{ route('admin.logout') }}" id="logout-form" method="POST">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                    @endauth
                 </ul>
             </div>
         </div>

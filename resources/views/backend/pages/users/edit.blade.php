@@ -37,6 +37,12 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="card card-box mb-2 p-4">
+                    <div class="mb-2">
+                        Пользователь: {{ $user->lastname.' '.$user->firstname.' '.$user->middlename }}
+                    </div>
+                    <div class="mb-3">
+                        Email: {{ $user->email }}
+                    </div>
                     <div class="form-check">
                         <input
                             class="form-check-input"
@@ -51,7 +57,18 @@
                         <label for="">Статус</label>
                         <select class="custom-select col-12" name="status">
                             @foreach(getUserStatuses() as $item)
-                                <option value="{{ $item['value'] }}" {{ $user->id == $item['value'] ? 'selected' : '' }}>{{ $item['label'] }}</option>
+                                <option value="{{ $item['value'] }}" {{ $user->status->value == $item['value'] ? 'selected' : '' }}>{{ $item['label'] }}</option>
+                            @endforeach
+                        </select>
+                        @error('status')
+                            <small class="text-danger error-text">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="">Роль</label>
+                        <select class="custom-select col-12" name="role">
+                            @foreach(getUserRoles() as $item)
+                                <option value="{{ $item['value'] }}" {{ $user->role == $item['value'] ? 'selected' : '' }}>{{ $item['label'] }}</option>
                             @endforeach
                         </select>
                         @error('status')
