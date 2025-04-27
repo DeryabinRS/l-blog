@@ -19,33 +19,43 @@
                 </nav>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
-                <a href="{{ route('admin.posts') }}" class="btn btn-secondary">
-                    <i class="icon-copy bi bi-list"></i> Список событий
+                <a href="{{ route('admin.users') }}" class="btn btn-secondary">
+                    <i class="icon-copy bi bi-list"></i> Список пользователей
                 </a>
             </div>
         </div>
     </div>
 
     <form
-{{--        action="{{ route('admin.update_post', [ 'user_id' => $user->id ]) }}"--}}
+        action="{{ route('admin.update_user', [ 'user_id' => $user->id ]) }}"
         method="POST"
         autocomplete="off"
         enctype="multipart/form-data"
-        id="updatePostForm"
+        id="updateUserForm"
     >
         @csrf
         <div class="row">
             <div class="col-lg-8">
                 <div class="card card-box mb-2 p-4">
-                    <div class="form-group">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            name="email_verified_at"
+                            id="email_verified_at"
+                            type="checkbox"
+                            {{(bool)$user->email_verified_at ? 'checked' : ''}}
+                        >
+                        <label class="form-check-label" for="email_verified_at">Подтверждение email</label>
+                    </div>
+                    <div class="form-group mt-3">
                         <label for="">Статус</label>
-                        <select class="custom-select col-12" name="post_category">
-                            @foreach($user_statuses as $item)
-                                <option value="{{ $item }}" {{ $user->id == $item ? 'selected' : '' }}>{{ $item }}</option>
+                        <select class="custom-select col-12" name="status">
+                            @foreach(getUserStatuses() as $item)
+                                <option value="{{ $item['value'] }}" {{ $user->id == $item['value'] ? 'selected' : '' }}>{{ $item['label'] }}</option>
                             @endforeach
                         </select>
-                        @error('post_category')
-                        <small class="text-danger error-text post_category_error">{{ $message }}</small>
+                        @error('status')
+                            <small class="text-danger error-text">{{ $message }}</small>
                         @enderror
                     </div>
                 </div>

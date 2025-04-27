@@ -6,7 +6,7 @@
                 <input wire:model.live="search" id="search" type="text" class="form-control text-secondary" placeholder="Найти...">
             </div>
             <div class="col-md-2">
-                <label for="post_category">Категория</label>
+                <label for="post_category">Статус</label>
                 <select wire:model.live="status" id="status" class="custom-select form-control">
                     <option value="">Выберите статус...</option>
                     <option value="active">Активный</option>
@@ -23,6 +23,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Имя</th>
                     <th scope="col">Статус</th>
+                    <th scope="col">Роль</th>
                     <th scope="col">Действия</th>
                 </thead>
                 <tbody>
@@ -30,9 +31,25 @@
                     <tr>
                         <td scope="row" width="30">{{ $item->id }}</td>
                         <td scope="row" width="90"><img src="{{ $item->picture }}" width="50" alt=""></td>
-                        <td scope="row" width="250">{{ $item->email }}</td>
-                        <td scope="row">{{ $item->lastname.' '.$item->firstname.' '.$item->middlename }}</td>
-                        <td scope="row">{{ $item->status }}</td>
+                        <td scope="row" width="250">
+                            <div class="mb-1">{{ $item->email }}</div>
+                            @if ($item->email_verified_at)
+                                <div class="badge badge-success">Подтвержден</div>
+                            @else
+                                <div class="badge badge-warning">Не подтвержден</div>
+                            @endif
+                        </td>
+                        <td scope="row">
+                            <div>{{ $item->lastname.' '.$item->firstname.' '.$item->middlename }}</div>
+                        </td>
+                        <td scope="row">
+                            {{ getUserStatus($item->status->value) ? getUserStatus($item->status->value)['label'] : '' }}
+                        </td>
+                        <td>
+                            <div class="badge badge-light">
+                                {{ getUserRole($item->role) ? getUserRole($item->role)['label'] : '' }}
+                            </div>
+                        </td>
                         <td scope="row" width="100">
                             <div class="table-actions">
                                 <a

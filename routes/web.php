@@ -59,6 +59,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::controller(UserController::class)->group(function () {
             Route::get('/users', 'allUsersAdmin')->name('users');
             Route::get('/user/{id}/edit', 'editUserAdmin')->name('edit_user');
+            Route::post('/user/update', 'updateUserAdmin')->name('update_user');
         });
     });
 });
