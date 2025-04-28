@@ -60,9 +60,6 @@
                                 <option value="{{ $item['value'] }}" {{ $user->status->value == $item['value'] ? 'selected' : '' }}>{{ $item['label'] }}</option>
                             @endforeach
                         </select>
-                        @error('status')
-                            <small class="text-danger error-text">{{ $message }}</small>
-                        @enderror
                     </div>
                     <div class="form-group mt-3">
                         <label for="">Роль</label>
@@ -71,9 +68,6 @@
                                 <option value="{{ $item['value'] }}" {{ $user->role == $item['value'] ? 'selected' : '' }}>{{ $item['label'] }}</option>
                             @endforeach
                         </select>
-                        @error('status')
-                            <small class="text-danger error-text">{{ $message }}</small>
-                        @enderror
                     </div>
                 </div>
             </div>

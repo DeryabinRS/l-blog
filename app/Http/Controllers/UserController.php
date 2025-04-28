@@ -32,11 +32,8 @@ class UserController extends Controller
     {
         $user = User::findOrFail($request->user_id);
 
-        $request->validate([
-            'status' => 'required',
-        ]);
-
         $user->status = $request->status;
+        $user->role = $request->role;
 
         if ($request->email_verified_at) {
             $user->email_verified_at = now()->timestamp;
