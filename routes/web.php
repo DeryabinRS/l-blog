@@ -1,10 +1,9 @@
 <?php
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
@@ -42,6 +41,7 @@ Route::view('/example-auth', 'example-auth');
  */
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['auth', 'preventBackHistory', 'isAdmin'])->group(function () {
+
         Route::controller(AdminController::class)->group(function () {
             Route::get('/dashboard', 'adminDashboard')->name('dashboard');
             Route::get('/profile', 'profileView')->name('profile');
@@ -66,6 +66,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/users', 'allUsersAdmin')->name('users');
             Route::get('/user/{id}/edit', 'editUserAdmin')->name('edit_user');
             Route::post('/user/update', 'updateUserAdmin')->name('update_user');
+        });
+
+        Route::controller(PageController::class)->group(function () {
+            Route::get('/pages', 'allPages')->name('pages');
+            Route::get('/page/{id}/edit', 'editPage')->name('edit_page');
+            Route::post('/page/update', 'updatePage')->name('update_page');
         });
     });
 });

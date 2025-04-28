@@ -67,8 +67,8 @@
                         <span class="mtext"> События </span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('admin.posts') }}" class="{{ Route::is('admin.posts') || Route::is('admin.edit_post') ? 'active' : '' }}">Список событий</a></li>
                         <li><a href="{{ route('admin.add_post') }}" class="{{ Route::is('admin.add_post') ? 'active' : '' }}">Добавить событие</a></li>
+                        <li><a href="{{ route('admin.posts') }}" class="{{ Route::is('admin.posts') || Route::is('admin.edit_post') ? 'active' : '' }}">Список событий</a></li>
                         <li>
                             <a
                                 href="{{ route('admin.post_categories') }}"
@@ -86,7 +86,7 @@
                     </a>
                     <ul class="submenu">
                         <li><a href="">Добавить</a></li>
-                        <li><a href="">Список страниц</a></li>
+                        <li><a href="{{ route('admin.pages') }}">Список страниц</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
