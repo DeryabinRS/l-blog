@@ -8,7 +8,7 @@
         <div class="login-title">
             <h2 class="text-center text-secondary">Регистрация</h2>
         </div>
-        <form action="{{ route('admin.register_handler') }}" method="POST">
+        <form action="{{ route('register_handler') }}" method="POST">
 
             <x-form-alerts></x-form-alerts>
             @csrf

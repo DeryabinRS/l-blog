@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         // Redirect No Auth User to Login Page
         Authenticate::redirectUsing(function () {
             Session::flash('fail', 'Пользователь должен быть авторизован');
-            return route('admin.login');
+            return route('login');
         });
 
         Blade::if('admin', function () {

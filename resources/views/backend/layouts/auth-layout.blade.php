@@ -48,12 +48,12 @@
         <div class="login-menu">
             <ul>
                 <li>
-                    @if(Route::is('admin.register'))
-                        <a href="{{ route('admin.login') }}" class="text-secondary">
+                    @if(Route::is('register'))
+                        <a href="{{ route('login') }}" class="text-secondary">
                             Вход
                         </a>
                     @else
-                        <a href="{{ route('admin.register') }}" class="text-secondary">
+                        <a href="{{ route('register') }}" class="text-secondary">
                             Регистрация
                         </a>
                     @endif

@@ -25,7 +25,7 @@ class AdminController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('admin/login')->with('info', 'Вы вышли из панели администратора');
+        return redirect('/login')->with('info', 'Вы вышли из панели администратора');
     }
 
     public function profileView(Request $request)

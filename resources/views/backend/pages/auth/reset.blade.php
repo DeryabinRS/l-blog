@@ -6,7 +6,7 @@
             <h2 class="text-center text-secondary">Восстановление пароля</h2>
         </div>
         <h6 class="mb-20">Введите новый пароль</h6>
-        <form action="{{ route('admin.reset_password_handler', ['token' => $token]) }}" method="POST">
+        <form action="{{ route('reset_password_handler', ['token' => $token]) }}" method="POST">
 
             <x-form-alerts></x-form-alerts>
             @csrf

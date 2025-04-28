@@ -6,7 +6,7 @@
                 <input wire:model.live="search" id="search" type="text" class="form-control text-secondary" placeholder="Найти...">
             </div>
             <div class="col-md-2">
-                <label for="post_category">Статус</label>
+                <label for="status">Статус</label>
                 <select wire:model.live="status" id="status" class="custom-select form-control">
                     <option value="">Выберите статус...</option>
                     <option value="active">Активный</option>

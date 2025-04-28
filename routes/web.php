@@ -11,6 +11,26 @@ use App\Http\Controllers\PostController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::middleware(['guest', 'preventBackHistory'])->group(function () {
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('/login', 'loginForm')->name('login');
+        Route::post('/login', 'loginHandler')->name('login_handler');
+        Route::get('/register', 'registerForm')->name('register');
+        Route::post('/register', 'registerHandler')->name('register_handler');
+        Route::get('/forgot-password', 'forgotForm')->name('forgot');
+        Route::post('/send-password-reset-link', 'sendPasswordResetLink')->name('send_password_reset_link');
+        Route::get('/password/{token}', 'resetPasswordForm')->name('reset_password_form');
+        Route::post('/reset-password-handler', 'resetPasswordHandler')->name('reset_password_handler');
+        Route::get('/validate_email/{id}/{token}', 'validateEmail')->name('validate_email');
+    });
+});
+
+Route::middleware(['auth', 'preventBackHistory'])->group(function () {
+    Route::controller(AdminController::class)->group(function () {
+        Route::post('/logout', 'logoutHandler')->name('logout');
+    });
+});
+
 /**
  * TESTING ROUTES
  */
@@ -21,25 +41,6 @@ Route::view('/example-auth', 'example-auth');
  * ADMIN ROUTES
  */
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::middleware(['guest', 'preventBackHistory'])->group(function () {
-        Route::controller(AuthController::class)->group(function () {
-            Route::get('/login', 'loginForm')->name('login');
-            Route::post('/login', 'loginHandler')->name('login_handler');
-            Route::get('/register', 'registerForm')->name('register');
-            Route::post('/register', 'registerHandler')->name('register_handler');
-            Route::get('/forgot-password', 'forgotForm')->name('forgot');
-            Route::post('/send-password-reset-link', 'sendPasswordResetLink')->name('send_password_reset_link');
-            Route::get('/password/{token}', 'resetPasswordForm')->name('reset_password_form');
-            Route::post('/reset-password-handler', 'resetPasswordHandler')->name('reset_password_handler');
-        });
-    });
-
-    Route::middleware(['auth', 'preventBackHistory'])->group(function () {
-        Route::controller(AdminController::class)->group(function () {
-            Route::post('/logout', 'logoutHandler')->name('logout');
-        });
-    });
-
     Route::middleware(['auth', 'preventBackHistory', 'isAdmin'])->group(function () {
         Route::controller(AdminController::class)->group(function () {
             Route::get('/dashboard', 'adminDashboard')->name('dashboard');

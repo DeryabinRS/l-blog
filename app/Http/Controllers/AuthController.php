@@ -50,23 +50,32 @@ class AuthController extends Controller
         );
 
         if(Auth::attempt($creds)) {
+            if (!auth()->user()->email_verified_at) {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect()->route('login')
+                    ->withInput()
+                    ->with('fail', 'Аккаунт не подвтержден. На Ваш Email при РЕГИСТРАЦИИ было выслано сообщение с условиями подтвержения аккаунта. Пожалуйста подтвердите свой аккаунт.');
+            }
+
             if (auth()->user()->status === UserStatus::BLOCKED) {
                 Auth::logout();
                 $request->session()->invalidate();
                 $request->session()->regenerateToken();
-                return redirect()->route('admin.login')->withInput()->with('fail', 'Пользователь заблокирован');
+                return redirect()->route('login')->withInput()->with('fail', 'Пользователь заблокирован');
             }
 
             if (auth()->user()->status === UserStatus::PENDING) {
                 Auth::logout();
                 $request->session()->invalidate();
                 $request->session()->regenerateToken();
-                return redirect()->route('admin.login')->withInput()->with('fail', 'Аккаунт находится в процессе проверки');
+                return redirect()->route('login')->withInput()->with('fail', 'Аккаунт находится в процессе проверки');
             }
 
             return redirect()->route('admin.dashboard');
         } else {
-            return redirect()->route('admin.login')->withInput()->with('fail', 'Не верный логин или пароль');
+            return redirect()->route('login')->withInput()->with('fail', 'Не верный логин или пароль');
         }
     }
 
@@ -102,7 +111,7 @@ class AuthController extends Controller
             ]);
         }
 
-        $actionLink = route('admin.reset_password_form', ['token' => $token]);
+        $actionLink = route('reset_password_form', ['token' => $token]);
 
         $data = array(
             'actionLink' => $actionLink,
@@ -119,9 +128,9 @@ class AuthController extends Controller
         );
 
         if (CMail::send($mailConfig)) {
-            return redirect()->route('admin.forgot')->with('success', 'На Ваш Email направлено письмо с восстановлением пароля');
+            return redirect()->route('forgot')->with('success', 'На Ваш Email направлено письмо с восстановлением пароля');
         } else {
-            return redirect()->route('admin.forgot')->with('fail', 'Ошибка восстановления пароля');
+            return redirect()->route('forgot')->with('fail', 'Ошибка восстановления пароля');
         }
     }
 
@@ -132,14 +141,14 @@ class AuthController extends Controller
                             ->first();
 
         if (!$isTokenExists) {
-            return redirect()->route('admin.forgot')->with('fail', 'Не правильная ссылка для восстановления пароля');
+            return redirect()->route('forgot')->with('fail', 'Не правильная ссылка для восстановления пароля');
         } else {
             $diffMins = Carbon::createFromFormat('Y-m-d H:i:s', $isTokenExists->created_at)
                             ->diffInMinutes(Carbon::now());
 
             if($diffMins > 15){
                 return redirect()
-                    ->route('admin.forgot')
+                    ->route('forgot')
                     ->with('fail', 'Срок ссылки для смены пароля истек. Пожалуйста повторите процедуру смены пароля');
             }
 
@@ -180,7 +189,7 @@ class AuthController extends Controller
             'title' => 'Восстановление пароля',
         );
 
-        $mail_body = view('email-templates.user-password', $data)->render();
+        $mail_body = view('email-templates.user-password-template', $data)->render();
 
         $mailConfig = array(
             'recipient_address' => $user->email,
@@ -195,10 +204,10 @@ class AuthController extends Controller
                 'token' => $dbToken->token,
             ])->delete();
 
-            return redirect()->route('admin.login')->with('success', 'Ваш пароль был успешно изменен');
+            return redirect()->route('login')->with('success', 'Ваш пароль был успешно изменен');
         } else {
             return redirect()
-                ->route('admin.reset_password_form', [ 'token' => $dbToken->token ])
+                ->route('reset_password_form', [ 'token' => $dbToken->token ])
                 ->with('fail', 'Ошибка изменения пароля. Попробуйте позже');
         }
     }
@@ -233,13 +242,15 @@ class AuthController extends Controller
         $saved = $user->save();
 
         if ($saved) {
+            $actionLink = route('validate_email', ['id' => $user->id, 'token' => $user->password]);
+
             $data = array(
                 'user' => $user,
-                'password' => $request->password,
                 'title' => 'Регистрация нового пользователя',
+                'actionLink' => $actionLink,
             );
 
-            $mail_body = view('email-templates.user-password-template', $data)->render();
+            $mail_body = view('email-templates.register-template', $data)->render();
 
             $mailConfig = array(
                 'recipient_address' => $user->email,
@@ -249,12 +260,37 @@ class AuthController extends Controller
             );
 
             if (CMail::send($mailConfig)) {
-                return redirect()->route('admin.login')->with('success', 'На Ваш Email направлено письмо с условиями активации аккаунта');
+                return redirect()->route('login')->with('success', 'На Ваш Email направлено письмо с условиями активации аккаунта');
             } else {
-                return redirect()->route('admin.login')->with('fail', 'Ошибка отправки сообщения');
+                return redirect()->route('login')->with('fail', 'Ошибка отправки сообщения');
             }
         } else {
-            return redirect()->route('admin.login')->with('fail', 'Ошибка регистрации пользователя');
+            return redirect()->route('login')->with('fail', 'Ошибка регистрации пользователя');
+        }
+    }
+
+    public function validateEmail(Request $request, $id = null, $token = null)
+    {
+        $user = User::findOrFail($id);
+
+        if ($user) {
+            if(!$user->email_verified_at) {
+                if ($user->password == $token) {
+                    $user->email_verified_at = now()->timestamp;
+                    $saved = $user->save();
+                    if ($saved) {
+                        return redirect()->route('login')->with('success', 'Ваш аккаунт успешно подтвержден');
+                    } else {
+                        return redirect()->route('login')->with('fail', 'Ошибка подтверждения аккаунта');
+                    }
+                } else {
+                    return redirect()->route('login')->with('fail', 'Ошибка подтверждения аккаунта');
+                }
+            } else {
+                return redirect()->route('login')->with('fail', 'Аккаунт уже подтвержден');
+            }
+        } else {
+            return redirect()->route('login')->with('fail', 'Ошибка подтверждения аккаунта');
         }
     }
 }

@@ -12,34 +12,23 @@
                 <img src="{{ $user->picture }}" alt="" class="avatar-photo" id="profilePicturePreview">
                 <input type="file" name="profilePictureFile" id="profilePictureFile" class="d-none" style="opacity: 0">
             </div>
-            <h5 class="text-center h5 mb-0">{{ $user->firstname . ' ' . $user->lastname }}</h5>
-            <p class="text-center text-muted font-14">
-                {{ $user->email }}
-            </p>
+            <h5 class="text-center h5 mb-2">{{ $user->firstname . ' ' . $user->lastname }}</h5>
+
             <div class="profile-info">
-                <h5 class="mb-20 h5 text-blue">Contact Information</h5>
+                <h5 class="mb-20 h5 text-blue">Контактная информация</h5>
                 <ul>
                     <li>
                         <span>Email Address:</span>
-                        FerdinandMChilds@test.com
+                        {{ $user->email }}
                     </li>
                     <li>
-                        <span>Phone Number:</span>
-                        619-229-0054
-                    </li>
-                    <li>
-                        <span>Country:</span>
-                        America
-                    </li>
-                    <li>
-                        <span>Address:</span>
-                        1807 Holden Street<br>
-                        San Diego, CA 92115
+                        <span>Телефон:</span>
+                        --------------
                     </li>
                 </ul>
             </div>
             <div class="profile-social">
-                <h5 class="mb-20 h5 text-blue">Social Links</h5>
+                <h5 class="mb-20 h5 text-secondary">Ссылки</h5>
                 <ul class="clearfix">
                     @if($facebook_url)
                         <li>
@@ -93,7 +82,7 @@
                                 data-toggle="tab"
                                 href="#personal_details"
                                 role="tab"
-                            >Personal details</a>
+                            >Персональные данные</a>
                         </li>
                         <li class="nav-item">
                             <a
@@ -102,7 +91,7 @@
                                 data-toggle="tab"
                                 href="#update_password"
                                 role="tab"
-                            >Update password</a>
+                            >Изменить пароль</a>
                         </li>
                         <li class="nav-item">
                             <a
@@ -111,7 +100,7 @@
                                 data-toggle="tab"
                                 href="#social_links"
                                 role="tab"
-                            >Social links</a>
+                            >Ссылки</a>
                         </li>
                     </ul>
                     <div class="tab-content">

@@ -24,7 +24,7 @@
     @kropifyStyles
     @stack('stylesheets')
 </head>
-<body>
+<body class="header-white sidebar-light">
 <div class="header">
     <div class="header-left">
         <div class="menu-icon bi bi-list"></div>
@@ -40,7 +40,7 @@
             <img
                 src="{{ isset(settings()->site_logo) ? settings()->site_logo : '/assets/images/logo.png' }}"
                 alt=""
-                class="light-logo site_logo"
+                class="site_logo"
             />
         </a>
         <div class="close-sidebar" data-toggle="left-sidebar-close">
@@ -77,6 +77,16 @@
                                 Категории событий
                             </a>
                         </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon fa fa-file-o"></span>
+                        <span class="mtext">Страницы</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="">Добавить</a></li>
+                        <li><a href="">Список страниц</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -154,8 +164,6 @@
 <!-- js -->
 <script src="/backend/vendors/scripts/core.js"></script>
 <script src="/backend/vendors/scripts/script.min.js"></script>
-<script src="/backend/vendors/scripts/process.js"></script>
-<script src="/backend/vendors/scripts/layout-settings.js"></script>
 <script src="/plugins/sweetalert2/sweetalert2.all.js"></script>
 @kropifyScripts
 <script>

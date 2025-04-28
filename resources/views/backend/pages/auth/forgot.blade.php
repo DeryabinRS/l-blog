@@ -8,7 +8,7 @@
         <p>
             Введите Ваш Email для восстановления пароля
         </p>
-        <form action="{{ route('admin.send_password_reset_link') }}" method="POST">
+        <form action="{{ route('send_password_reset_link') }}" method="POST">
 
             <x-form-alerts></x-form-alerts>
             @csrf
@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-5">
                     <div class="input-group mb-0">
-                        <a class="btn btn-outline-primary btn-lg btn-block" href="{{ route('admin.login') }}">Вход</a>
+                        <a class="btn btn-outline-primary btn-lg btn-block" href="{{ route('login') }}">Вход</a>
                     </div>
                 </div>
             </div>

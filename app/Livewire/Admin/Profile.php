@@ -164,7 +164,7 @@ class Profile extends Component
 
             auth()->logout();
             Session::flash('info', 'Ваш парольбыл изменен. Пожалуйста войдите в приложение с новым паролем');
-            $this->redirectRoute('admin.login');
+            $this->redirectRoute('login');
         } else {
             $this->dispatch('showToast', ['type' => 'error', 'message' => 'Ошибка обновления данных']);
         }

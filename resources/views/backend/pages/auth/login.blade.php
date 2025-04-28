@@ -6,7 +6,7 @@
         <div class="login-title">
             <h2 class="text-center text-secondary">Вход</h2>
         </div>
-        <form action="{{ route('admin.login_handler') }}" method="POST">
+        <form action="{{ route('login_handler') }}" method="POST">
 
             <x-form-alerts></x-form-alerts>
             @csrf
@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-6">
                     <div class="forgot-password">
-                        <a href="{{ route('admin.forgot') }}">Забыли пароль?</a>
+                        <a href="{{ route('forgot') }}">Забыли пароль?</a>
                     </div>
                 </div>
             </div>

@@ -12,16 +12,16 @@
             <span class="user-name">{{ $user->firstname . ' ' . $user->lastname }}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-            <a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="dw dw-user1"></i> Profile</a>
-            <a class="dropdown-item" href="{{ route('admin.settings') }}"><i class="dw dw-settings2"></i> Setting</a>
+            <a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="dw dw-user1"></i> Профиль</a>
+            <a class="dropdown-item" href="{{ route('admin.settings') }}"><i class="dw dw-settings2"></i> Настройки</a>
             <a
                 class="dropdown-item"
-                href="{{ route('admin.logout') }}"
+                href="{{ route('logout') }}"
                 onclick="event.preventDefault();document.getElementById('logout-form').submit();"
             >
-                <i class="dw dw-logout"></i> Log Out
+                <i class="dw dw-logout"></i> Выйти
             </a>
-            <form action="{{ route('admin.logout') }}" id="logout-form" method="POST">
+            <form action="{{ route('logout') }}" id="logout-form" method="POST">
                 @csrf
             </form>
         </div>

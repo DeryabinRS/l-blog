@@ -11,11 +11,10 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/plugins/bootstrap/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/assets/styles/index.css"/>
-    {{ isset(settings()->site_title) ? settings()->site_title : '' }}
+
     @stack('stylesheets')
 </head>
 <body>
-
 <header>
     <nav class="navbar navbar-expand-lg navbar-light fixed">
         <div class="container-xxl">
@@ -54,19 +53,19 @@
 {{--                            <li><a class="dropdown-item" href="#">Profile</a></li>--}}
                             @admin
                             <li>
-                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Панель администратора</a>
                             </li>
                             @endadmin
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <a
                                     class="dropdown-item"
-                                    href="{{ route('admin.logout') }}"
+                                    href="{{ route('logout') }}"
                                     onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                                 >
-                                    <i class="dw dw-logout"></i> Log Out
+                                    <i class="dw dw-logout"></i> Выйти
                                 </a>
-                                <form action="{{ route('admin.logout') }}" id="logout-form" method="POST">
+                                <form action="{{ route('logout') }}" id="logout-form" method="POST">
                                     @csrf
                                 </form>
                             </li>
