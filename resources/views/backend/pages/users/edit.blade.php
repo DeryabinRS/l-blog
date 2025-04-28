@@ -35,14 +35,19 @@
     >
         @csrf
         <div class="row">
-            <div class="col-lg-8">
-                <div class="card card-box mb-2 p-4">
-                    <div class="mb-2">
-                        Пользователь: {{ $user->lastname.' '.$user->firstname.' '.$user->middlename }}
+            <div class="col-lg-3 mb-4">
+                <div class="card card-box p-4">
+                    <div><img class="img-fluid img-thumbnail" src="{{ $user->picture }}" alt="" /></div>
+                    <div class="my-2">
+                        {{ $user->lastname.' '.$user->firstname.' '.$user->middlename }}
                     </div>
                     <div class="mb-3">
-                        Email: {{ $user->email }}
+                        {{ $user->email }}
                     </div>
+                </div>
+            </div>
+            <div class="col-lg-9 mb-4">
+                <div class="card card-box mb-2 p-4">
                     <div class="form-check">
                         <input
                             class="form-check-input"
@@ -61,7 +66,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group mt-3">
+                    <div class="form-group">
                         <label for="">Роль</label>
                         <select class="custom-select col-12" name="role">
                             @foreach(getUserRoles() as $item)
@@ -69,11 +74,11 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="d-block mt-1">
+                        <button type="submit" class="btn badge-primary">Сохранить</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="d-block mt-2 mb-3">
-            <button type="submit" class="btn badge-primary">Сохранить</button>
         </div>
     </form>
 @endsection
