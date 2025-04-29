@@ -46,11 +46,11 @@ class Index extends Component
         $this->dispatch('deleteRecord', ['id' => $id]);
     }
 
-    public function deletePostAction($id)
+    public function deleteAction($id)
     {
-        $post = Page::findOrFail($id);
+        $page = Page::findOrFail($id);
 
-        $delete = $post->delete();
+        $delete = $page->delete();
         if ($delete) {
             $this->dispatch('showToast', ['type' => 'success', 'message' => 'Данные успешно удалены']);
         } else {

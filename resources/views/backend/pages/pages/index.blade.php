@@ -18,8 +18,32 @@
                     </ol>
                 </nav>
             </div>
+            <div class="col-md-6 col-sm-12 text-right">
+                <a href="{{ route('admin.add_page') }}" class="btn btn-success">
+                    <i class="icon-copy bi bi-plus-circle"></i> Создать
+                </a>
+            </div>
         </div>
     </div>
 
     @livewire('admin.pages.index')
 @endsection
+@push('scripts')
+    <script>
+        window.addEventListener('deleteRecord', (data) => {
+            const id = data.detail[0].id;
+            swal({
+                title: 'Вы уверены?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                confirmButtonText: 'Удалить'
+            }).then(function (data) {
+                if (data.value) {
+                    Livewire.dispatch('deleteAction', [id]);
+                }
+            });
+        });
+    </script>
+@endpush

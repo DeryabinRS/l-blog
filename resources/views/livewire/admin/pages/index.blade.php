@@ -20,20 +20,21 @@
                 <th scope="col">#ID</th>
                 <th scope="col">Название</th>
                 <th scope="col">Видимость</th>
+                <th scope="col">Действия</th>
                 </thead>
                 <tbody>
                 @forelse($pages as $item)
                     <tr>
                         <td scope="row" width="30">{{ $item->id }}</td>
                         <td scope="row">{{ $item->title }}</td>
-                        <td scope="row">
+                        <td scope="row" width="150">
                             @if($item->visibility == 1)
                                 <span class="badge badge-pill badge-success">Опубликовано</span>
                             @else
                                 <span class="badge badge-pill badge-warning">Скрыто</span>
                             @endif
                         </td>
-                        <td scope="row">
+                        <td scope="row" width="100">
                             <div class="table-actions">
                                 <a
                                     href="{{ route('admin.edit_page', ['id' => $item->id]) }}"

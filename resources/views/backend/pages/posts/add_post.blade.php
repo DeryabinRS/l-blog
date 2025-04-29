@@ -146,7 +146,7 @@
             </div>
         </div>
         <div class="d-block mt-2 mb-3">
-            <button type="submit" class="btn badge-primary">Добавить событие</button>
+            <button type="submit" class="btn badge-success">Создать</button>
         </div>
     </form>
 @endsection

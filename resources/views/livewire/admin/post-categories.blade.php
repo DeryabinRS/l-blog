@@ -7,7 +7,9 @@
                         <h4 class="h4 text-secondary">Категории событий</h4>
                     </div>
                     <div class="pull-right">
-                        <a href="javascript:;" wire:click="createPostCategoryForm()" class="btn btn-primary btn-sm">Добавить</a>
+                        <a href="javascript:;" wire:click="createPostCategoryForm()" class="btn btn-success btn-sm">
+                            <i class="icon-copy bi bi-plus-circle"></i> Создать
+                        </a>
                     </div>
                 </div>
                 <div class="table-responsive mt-4">

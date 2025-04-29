@@ -19,8 +19,8 @@
                 </nav>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
-                <a href="{{ route('admin.add_post') }}" class="btn btn-primary">
-                    <i class="icon-copy bi bi-plus-circle"></i> Добавить событие
+                <a href="{{ route('admin.add_post') }}" class="btn btn-success">
+                    <i class="icon-copy bi bi-plus-circle"></i> Создать
                 </a>
             </div>
         </div>

@@ -70,6 +70,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::controller(PageController::class)->group(function () {
             Route::get('/pages', 'allPages')->name('pages');
+            Route::get('/page/add', 'addPage')->name('add_page');
+            Route::post('/create-page', 'createPage')->name('create_page');
             Route::get('/page/{id}/edit', 'editPage')->name('edit_page');
             Route::post('/page/update', 'updatePage')->name('update_page');
         });

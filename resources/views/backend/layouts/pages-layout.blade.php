@@ -67,7 +67,7 @@
                         <span class="mtext"> События </span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('admin.add_post') }}" class="{{ Route::is('admin.add_post') ? 'active' : '' }}">Добавить событие</a></li>
+                        <li><a href="{{ route('admin.add_post') }}" class="{{ Route::is('admin.add_post') ? 'active' : '' }}">Добавить</a></li>
                         <li><a href="{{ route('admin.posts') }}" class="{{ Route::is('admin.posts') || Route::is('admin.edit_post') ? 'active' : '' }}">Список событий</a></li>
                         <li>
                             <a
@@ -85,7 +85,7 @@
                         <span class="mtext">Страницы</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="">Добавить</a></li>
+                        <li><a href="{{ route('admin.add_page') }}">Добавить</a></li>
                         <li><a href="{{ route('admin.pages') }}">Список страниц</a></li>
                     </ul>
                 </li>
@@ -109,7 +109,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/admin/filemanager" class="dropdown-toggle no-arrow">
+                    <a href="/admin/filemanager" target="_blank" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-files"></span>
                         <span class="mtext">Файловый менеджер</span>
                     </a>
