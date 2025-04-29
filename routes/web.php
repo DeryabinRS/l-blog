@@ -64,16 +64,24 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::controller(UserController::class)->group(function () {
             Route::get('/users', 'allUsersAdmin')->name('users');
-            Route::get('/user/{id}/edit', 'editUserAdmin')->name('edit_user');
-            Route::post('/user/update', 'updateUserAdmin')->name('update_user');
+            Route::get('/users/{id}/edit', 'editUserAdmin')->name('edit_user');
+            Route::post('/users/update', 'updateUserAdmin')->name('update_user');
         });
 
         Route::controller(PageController::class)->group(function () {
             Route::get('/pages', 'allPages')->name('pages');
-            Route::get('/page/add', 'addPage')->name('add_page');
+            Route::get('/pages/add', 'addPage')->name('add_page');
             Route::post('/create-page', 'createPage')->name('create_page');
-            Route::get('/page/{id}/edit', 'editPage')->name('edit_page');
-            Route::post('/page/update', 'updatePage')->name('update_page');
+            Route::get('/pages/{id}/edit', 'editPage')->name('edit_page');
+            Route::post('/pages/update', 'updatePage')->name('update_page');
+        });
+
+        Route::controller(PageController::class)->group(function () {
+            Route::get('/menu-items', 'menuItems')->name('menu_items');
+            Route::get('/menu-items/add', 'addMenuItem')->name('add_menu_item');
+//            Route::post('/create-page', 'createPage')->name('create_page');
+//            Route::get('/page/{id}/edit', 'editPage')->name('edit_page');
+//            Route::post('/page/update', 'updatePage')->name('update_page');
         });
     });
 });

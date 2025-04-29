@@ -4,30 +4,12 @@
     <link rel="stylesheet" href="/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
 @endpush
 @section('content')
-    <div class="page-header">
-        <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <div class="title">
-                    <h4>{{ $pageTitle }}</h4>
-                </div>
-                <nav aria-label="breadcrumb" role="navigation">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('admin.dashboard') }}">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            {{ $pageTitle }}
-                        </li>
-                    </ol>
-                </nav>
-            </div>
-            <div class="col-md-6 col-sm-12 text-right">
-                <a class="btn btn-secondary" href="{{ route('admin.pages') }}">
-                    <i class="icon-copy bi bi-list"></i> Список записей
-                </a>
-            </div>
-        </div>
-    </div>
+    <x-admin.page-title
+        pageTitle="{{ $pageTitle }}"
+        btnRoute="admin.pages"
+        btnIcon="bi bi-list"
+        btnText="Список записей"
+    />
 
     <form
         action="{{ route('admin.create_page') }}"

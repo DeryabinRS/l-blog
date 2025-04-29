@@ -60,6 +60,26 @@
                     </a>
                 </li>
                 <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon fa fa-list"></span>
+                        <span class="mtext">Меню</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="{{ route('admin.add_menu_item') }}">Добавить</a></li>
+                        <li><a href="{{ route('admin.menu_items') }}">Список меню</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon fa fa-file-o"></span>
+                        <span class="mtext">Страницы</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="{{ route('admin.add_page') }}" class="{{ Route::is('admin.add_page') ? 'active' : '' }}">Добавить</a></li>
+                        <li><a href="{{ route('admin.pages') }}" class="{{ Route::is('admin.pages') ? 'active' : '' }}">Список страниц</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
                     <a
                         href="javascript:;"
                         class="dropdown-toggle">
@@ -77,16 +97,6 @@
                                 Категории событий
                             </a>
                         </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon fa fa-file-o"></span>
-                        <span class="mtext">Страницы</span>
-                    </a>
-                    <ul class="submenu">
-                        <li><a href="{{ route('admin.add_page') }}">Добавить</a></li>
-                        <li><a href="{{ route('admin.pages') }}">Список страниц</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
