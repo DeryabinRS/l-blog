@@ -22,7 +22,7 @@
             <th scope="col">Действия</th>
             </thead>
             <tbody>
-            @forelse($pages as $item)
+            @forelse($menuItems as $item)
                 <tr>
                     <td scope="row" width="30">{{ $item->id }}</td>
                     <td scope="row">{{ $item->title }}</td>
@@ -60,8 +60,6 @@
         </table>
     </div>
     <div class="block mt-1">
-        {{ $pages->links('livewire::simple-bootstrap') }}
+        {{ $menuItems->links('livewire::simple-bootstrap') }}
     </div>
 </div>
-
-

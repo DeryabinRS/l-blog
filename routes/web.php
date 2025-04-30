@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -76,12 +77,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/pages/update', 'updatePage')->name('update_page');
         });
 
-        Route::controller(PageController::class)->group(function () {
+        Route::controller(MenuController::class)->group(function () {
             Route::get('/menu-items', 'menuItems')->name('menu_items');
             Route::get('/menu-items/add', 'addMenuItem')->name('add_menu_item');
-//            Route::post('/create-page', 'createPage')->name('create_page');
-//            Route::get('/page/{id}/edit', 'editPage')->name('edit_page');
-//            Route::post('/page/update', 'updatePage')->name('update_page');
+            Route::post('/create-menu-item', 'createMenuItem')->name('create_menu_item');
+            Route::get('/menu-items/{id}/edit', 'editMenuItem')->name('edit_menu_item');
+            Route::post('/menu-items/update', 'updateMenuItem')->name('update_menu_item');
         });
     });
 });

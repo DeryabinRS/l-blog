@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 255)->default(NULL);
+            $table->string('title', 255);
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('menus')->cascadeOnDelete();
             $table->string('icon', 255)->default(NULL);
             $table->string('order')->default(0);
-            $table->string('slug', 255)->default(NULL);
+            $table->string('slug', 255);
+            $table->integer('visibility')->default(1);
             $table->timestamps();
         });
     }

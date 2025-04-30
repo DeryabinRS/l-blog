@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
@@ -28,21 +29,21 @@ class PageController extends Controller
             'content' => 'required',
         ]);
 
-        $post = new Page();
-        $post->title = $request->title;
-        $post->content = $request->{'content'};
-        $post->visibility = $request->visibility;
-        $post->meta_keywords = $request->meta_keywords;
-        $post->meta_description = $request->meta_description;
+        $page = new Page();
+        $page->title = $request->title;
+        $page->content = $request->{'content'};
+        $page->slug = Str::slug($request->title);
+        $page->visibility = $request->visibility;
+        $page->meta_keywords = $request->meta_keywords;
+        $page->meta_description = $request->meta_description;
 
-        $saved = $post->save();
+        $saved = $page->save();
 
         if ($saved) {
             return redirect()->route('admin.pages')->with('success', 'Новая страница успешно создана');
         } else {
             return redirect()->route('admin.pages')->with('fail', 'Ошибка добавления данных');
         }
-
     }
 
     public function editPage(Request $request, $id = null)
