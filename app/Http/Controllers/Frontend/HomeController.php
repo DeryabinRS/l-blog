@@ -22,7 +22,7 @@ class HomeController extends Controller
             return [
                 'id' => $post->id,
                 'title' => $post->title,
-                'content' => Str::words(strip_tags($post->content), 15, '...'),
+                'content' => Str::words(strip_tags($post->content), 20, '...'),
                 'featured_image' => $post->featured_image,
                 'author' => $user->firstname . ' ' . $user->lastname,
             ];

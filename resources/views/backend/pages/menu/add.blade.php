@@ -60,7 +60,7 @@
                             placeholder="Введите название"
                             value="{{ old('slug') }}"
                         >
-                        @error('title')
+                        @error('slug')
                             <small class="text-danger error-text title_error">{{ $message }}</small>
                         @enderror
                     </div>

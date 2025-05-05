@@ -22,4 +22,13 @@ class Menu extends Model
             $query->where('title', 'like', $term);
         });
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(Menu::class, 'parent_id');
+    }
+
+    public function children(){
+        return $this->hasMany(Menu::class , 'parent_id');
+    }
 }

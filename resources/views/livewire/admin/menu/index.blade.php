@@ -18,6 +18,7 @@
             <thead class="bg-secondary text-white">
             <th scope="col">#ID</th>
             <th scope="col">Название</th>
+            <th scope="col">Родитель</th>
             <th scope="col">Видимость</th>
             <th scope="col">Действия</th>
             </thead>
@@ -26,6 +27,9 @@
                 <tr>
                     <td scope="row" width="30">{{ $item->id }}</td>
                     <td scope="row">{{ $item->title }}</td>
+                    <td scope="row">
+                        {{ $item->parent ? $item->parent->title : '' }}
+                    </td>
                     <td scope="row" width="150">
                         @if($item->visibility == 1)
                             <span class="badge badge-pill badge-success">Опубликовано</span>

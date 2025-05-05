@@ -50,12 +50,24 @@ class Index extends Component
     {
         $page = Menu::findOrFail($id);
 
-        $delete = $page->delete();
-        if ($delete) {
-            $this->dispatch('showToast', ['type' => 'success', 'message' => 'Данные успешно удалены']);
+        if ($page->children->count() > 0) {
+            $this->dispatch('showToast', [
+                'type' => 'error',
+                'message' => 'Ошибка удаления данных',
+                'text' => 'У данного пункта меню есть зависимости',
+                'timer' => 5000,
+                'toast' => ' ',
+                'position' => 'center',
+            ]);
         } else {
-            $this->dispatch('showToast', ['type' => 'error', 'message' => 'Ошибка удаления данных']);
+            $delete = $page->delete();
+            if ($delete) {
+                $this->dispatch('showToast', ['type' => 'success', 'message' => 'Данные успешно удалены']);
+            } else {
+                $this->dispatch('showToast', ['type' => 'error', 'message' => 'Ошибка удаления данных']);
+            }
         }
+
     }
 
     public function render()

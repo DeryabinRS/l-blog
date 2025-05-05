@@ -14,12 +14,12 @@
 
     <div class="section-news">
         <div class="container">
-            <div class="title_box">
+            <div class="title_box mb-5">
                 <h2>Полезная информация</h2>
             </div>
             <div class="row">
                 @if(!empty($firstPost))
-                <div class="col-lg-6 mt-5">
+                <div class="col-lg-6">
                     <div class="news_general">
                         <div class="text-center img">
                             <a href="#"><img src="/images/posts/{{$firstPost['featured_image']}}" alt="{{$firstPost['title']}}" class="img-fluid"></a>
@@ -43,12 +43,12 @@
                 <div class="col-lg-6">
                     @if(!empty($posts))
                         @foreach($posts as $item)
-                            <div class="news_box mt-5">
+                            <div class="news_box mb-5">
                                 <div class="row">
                                     <div class="col-md-4 img"><a href="#"><img src="/images/posts/{{$item['featured_image']}}" alt="{{$item['title']}}" alt="new1" class="img-fluid"></a></div>
                                     <div class="col-md-8 desc">
                                         <h5>{{$item['title']}}</h5>
-                                        <p>
+                                        <p class="mt-2">
                                             {{$item['content']}}
                                         </p>
                                     </div>
