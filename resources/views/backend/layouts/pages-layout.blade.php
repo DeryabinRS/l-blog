@@ -11,15 +11,7 @@
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-    <!-- Google Font -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    />
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="/backend/vendors/styles/core.css"/>
-    <link rel="stylesheet" type="text/css" href="/backend/vendors/styles/icon-font.min.css" />
-    <link rel="stylesheet" type="text/css" href="/backend/vendors/styles/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/plugins/bootstrap/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/plugins/sweetalert2/sweetalert2.css" />
     @kropifyStyles
     @stack('stylesheets')
@@ -170,10 +162,8 @@
     </div>
 </div>
 
-
-<!-- js -->
-<script src="/backend/vendors/scripts/core.js"></script>
-<script src="/backend/vendors/scripts/script.min.js"></script>
+<script src="/assets/plugins/jquery/jquery-3.7.1.min.js"></script>
+<script src="/assets/plugins/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="/plugins/sweetalert2/sweetalert2.all.js"></script>
 @kropifyScripts
 <script>
